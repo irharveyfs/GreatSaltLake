@@ -1,0 +1,12 @@
+.DS_Store
+
+# Local source material and extracted private/research inputs.
+imported-email/
+extracted/
+Ian-Harvey-private-v14-planning-dossier.md
+
+# Raw email exports and generated archives.
+*.emlx
+*.mbox
+*.zip
+
