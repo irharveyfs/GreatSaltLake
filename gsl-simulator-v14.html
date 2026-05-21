@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GSL Elevation Simulator v14</title>
+<link rel="icon" href="data:,">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
 <style>
@@ -81,6 +82,10 @@ input[type=range]{width:100%;accent-color:var(--primary);cursor:pointer}
 .scenario-tbl th{background:var(--surface);text-align:left;padding:6px 8px;font-weight:600}
 .scenario-tbl td{border-bottom:1px solid #eee;padding:5px 8px}
 .scenario-tbl .total-row{background:#e8f5e9;font-weight:700}
+.accounting-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:8px}
+.accounting-wrap .scenario-tbl{min-width:980px;margin-top:0}
+.accounting-note{background:#f6fbfc;border-left:4px solid var(--primary);border-radius:4px;padding:10px 14px;font-size:0.84em;color:var(--text-sec);margin-top:12px}
+.accounting-structural{color:#7b1fa2;font-weight:600}
 .btn{padding:10px 18px;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.9em;border:none;transition:all 0.2s}
 .btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-hover)}
 .btn-outline{background:#fff;color:var(--primary);border:2px solid var(--primary)}.btn-outline:hover{background:#e0f2f5}
@@ -105,6 +110,9 @@ input[type=range]{width:100%;accent-color:var(--primary);cursor:pointer}
 .wp-frame table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.88em}
 .wp-frame th,.wp-frame td{border:1px solid #ddd;padding:6px 10px;text-align:left}
 .wp-frame th{background:var(--surface)}
+.wp-figure{margin:18px 0;padding:12px;border:1px solid var(--border);border-radius:8px;background:#fafafa}
+.wp-figure img{width:100%;height:auto;border-radius:6px;display:block}
+.wp-figure figcaption{font-size:0.82em;color:var(--text-sec);margin-top:8px;line-height:1.5}
 .download-box{background:linear-gradient(135deg,#e3f2fd,#bbdefb);border:2px solid #1565c0;border-radius:10px;padding:24px;text-align:center;margin:20px 0;cursor:pointer;transition:all 0.3s}
 .download-box:hover{box-shadow:0 4px 16px rgba(21,101,192,0.25);transform:translateY(-2px)}
 .download-box h3{color:#1565c0;margin:0 0 8px}
@@ -194,16 +202,19 @@ footer{padding:12px;text-align:center;font-size:0.78em;color:var(--text-sec);bac
 <button class="tab-btn" onclick="switchTab('dosc')">&#128300; Damped Oscillator</button>
 <button class="tab-btn" onclick="switchTab('how')">&#128214; How It Works</button>
 <button class="tab-btn" onclick="switchTab('xval')">&#9989; Cross-Validation</button>
+<button class="tab-btn" onclick="switchTab('hyp')">&#129514; Testing Hypotheses</button>
+<button class="tab-btn" onclick="switchTab('methods')">&#9881;&#65039; Model &amp; Methods</button>
 <button class="tab-btn" onclick="switchTab('bathy')">&#128208; USGS Bathymetry</button>
 <button class="tab-btn" onclick="switchTab('wp')">&#128196; RC Circuit White Paper</button>
 <button class="tab-btn" onclick="switchTab('glossary')">&#128218; Glossary</button>
 <button class="tab-btn" onclick="switchTab('data')">&#128202; Data Explorer</button>
+<button class="tab-btn" onclick="switchTab('history')">&#128340; Version History</button>
 </div>
 
 <!-- ===================== OVERVIEW (TAB 1 - EDUCATION) ===================== -->
 <div id="tab-overview" class="tab-content active">
 <h2>Great Salt Lake Recovery Overview</h2>
-<p>A simplified education view using the same v10.4 forecast engine and uncertainty envelope. Conservation aggregates the non-augmentation Strike Team levers; augmentation maps to new water augmentation.</p>
+<p>A simplified education view using the same v10.4 forecast engine and uncertainty envelope. When online, the forecast anchors to the live USGS Saltair elevation; otherwise it falls back to the v10.4 baseline. Conservation aggregates the non-augmentation Strike Team levers; augmentation maps to new water augmentation.</p>
 <div class="overview-grid">
 <div class="overview-panel">
 <h3>Two Recovery Levers</h3>
@@ -218,7 +229,7 @@ footer{padding:12px;text-align:center;font-size:0.78em;color:var(--text-sec);bac
 <div class="slider-note">0&ndash;1,500 kAf/yr, tied to v10.4 augmentation range</div>
 </div>
 <button class="btn btn-outline btn-block" onclick="resetOverview()" style="margin-top:14px">&#8634; Reset Overview</button>
-<div class="overview-note">This tab keeps the policy story simple. The Simulator tab keeps the full lever detail and will receive the preset year-by-year accounting tables in the next implementation slice.</div>
+<div class="overview-note">This tab keeps the policy story simple. The Simulator tab keeps the full lever detail and read-only preset year-by-year accounting tables.</div>
 </div>
 <div class="card" style="margin:0">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
@@ -335,7 +346,8 @@ footer{padding:12px;text-align:center;font-size:0.78em;color:var(--text-sec);bac
 <div class="live-val" id="liveElev">4,192.1</div>
 <div class="live-time" id="liveTime">ft NGVD29 (cached)</div>
 </div>
-<div class="stat-card"><h4>Total Lever Inflow</h4><div class="stat-val" id="totalKaf">0</div><div class="stat-sub">kAf/yr Engineered</div></div>
+<div class="stat-card"><h4>Avg Modeled Inflow</h4><div class="stat-val" id="totalKaf">0</div><div class="stat-sub">kAf/yr through presets</div></div>
+<div class="stat-card"><h4>Structural Baseline Gain</h4><div class="stat-val" id="structuralGain">65</div><div class="stat-sub">kAf/yr tracked separately</div></div>
 
 <!-- LEP box removed in v10.4 per user request -->
 <div style="display:none"><span id="lepVal">102</span><span id="lepPercent">0%</span><span id="lepKaf">0</span><div id="lepBar"></div></div>
@@ -352,6 +364,7 @@ footer{padding:12px;text-align:center;font-size:0.78em;color:var(--text-sec);bac
 <tr><td>Mineral Ext. <span class="unv">&starf;</span></td><td id="tMn">0</td><td id="eMn">0.0 ft</td></tr>
 <tr><td>Reservoir Ops</td><td id="tRs">0</td><td id="eRs">0.0 ft</td></tr>
 <tr><td>New Water Aug.</td><td id="tAu">0</td><td id="eAu">0.0 ft</td></tr>
+<tr><td>Structural gain realized</td><td id="tStructural" class="accounting-structural">65</td><td>separate</td></tr>
 <tr class="total-row"><td>TOTAL</td><td id="tTotal">0</td><td id="eTotal" style="color:var(--success)">0.0 ft</td></tr>
 <tr><td colspan="3" style="font-size:0.78em;color:#888">Lake-Effect Bonus: <span id="lepBonus">0.0 ft</span></td></tr>
 </tbody>
@@ -360,6 +373,18 @@ footer{padding:12px;text-align:center;font-size:0.78em;color:var(--text-sec);bac
 
 <button class="btn btn-primary btn-block" onclick="printReport()" style="margin-top:10px">&#128424; Print Scenario Report</button>
 </div>
+</div>
+
+<div class="card" style="margin:0 40px 20px">
+<h3>Preset Year-by-Year Accounting</h3>
+<p style="font-size:0.88em;color:var(--text-sec)">Read-only annual delivery table driven by the Simulator sliders. Recurring levers ramp in over time; episodic and one-time levers follow preset delivery profiles. The structural baseline gain is shown for accounting transparency but is not double-counted as new policy water.</p>
+<div class="accounting-wrap">
+<table class="scenario-tbl">
+<thead><tr><th>Year</th><th>Ag</th><th>M&amp;I</th><th>Phrag.</th><th>Newfoundland</th><th>Mineral</th><th>Reservoir</th><th>Aug.</th><th>Modeled Total</th><th>Structural Gain</th><th>Forecast Elev.</th></tr></thead>
+<tbody id="annualAccountingBody"></tbody>
+</table>
+</div>
+<div class="accounting-note">Preset logic: agricultural leasing is water-year limited, Newfoundland is treated as a front-loaded/one-time source, reservoir operations are episodic, M&amp;I/phragmites/mineral reductions are recurring after ramp-up, and augmentation follows a construction-style ramp. US Magnesium-type gains appear as structural baseline gains already realized.</div>
 </div>
 
 <!-- Disclaimer -->
@@ -383,11 +408,11 @@ DISCLAIMER: Outputs from computer models are subject to uncertainties. The Great
      ============================================================ -->
 <div id="copyright-notice" style="border-top:2px solid #336699;margin-top:40px;padding:20px 30px 10px 30px;font-family:'Segoe UI',Arial,sans-serif;font-size:13px;color:#555;line-height:1.6">
   <p style="font-weight:bold;color:#333;font-size:14px;margin-bottom:8px">&copy; 2024&ndash;2026 Ian Harvey. All Rights Reserved.</p>
-  <p><strong>Great Salt Lake Forced Damped Oscillator Simulator v10.4</strong><br>Author: Ian Harvey &nbsp;|&nbsp; GreatSaltRiver.org<br>Created with AI-assisted coding and analytical tools (Perplexity AI).</p>
+  <p><strong>Great Salt Lake Forced Damped Oscillator Simulator v14 Private Draft</strong><br>Author: Ian Harvey &nbsp;|&nbsp; GreatSaltRiver.org<br>Created with AI-assisted coding and analytical tools (Perplexity AI).</p>
   <p>This work&mdash;including all original text, code, analytical framework, data compilations, visualizations, and interactive elements&mdash;is the intellectual property of Ian Harvey.</p>
   <p><strong>Data Sources &amp; Attribution:</strong> USGS lake elevation records (NGVD29); NOAA NCEI ERSST v5 (PDO); USGS Bathymetry (Baskin 2005, 2006); Great Salt Lake Strike Team 2026 Data &amp; Insights Summary; Tarboton elevation&ndash;volume relationships; Open-Meteo (ERA5-Land ET&#8320; monthly climatology).</p>
   <p><strong>License:</strong> <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution 4.0 International (CC BY 4.0)</a> for non-commercial scientific, educational, and policy purposes.</p>
-  <p><strong>Suggested Citation:</strong><br>Harvey, I. (2026). <em>Great Salt Lake Forced Damped Oscillator Simulator, v10.4.</em> GreatSaltRiver.org.</p>
+  <p><strong>Suggested Citation:</strong><br>Harvey, I. (2026). <em>Great Salt Lake Forced Damped Oscillator Simulator, v14 private draft.</em> GreatSaltRiver.org.</p>
   <p style="font-size:11px;color:#888">AI Disclosure: This application was developed collaboratively using Perplexity AI as a research and coding assistant. All scientific decisions, data selection, model design, parameter choices, and editorial direction were made by Ian Harvey.</p>
 </div>
 
@@ -670,6 +695,67 @@ DISCLAIMER: Outputs from computer models are subject to uncertainties. The Great
 <footer>&copy; 2024&ndash;2026 Ian R. Harvey. All Rights Reserved.</footer>
 </div>
 
+<!-- ===================== TESTING HYPOTHESES (TAB 6) ===================== -->
+<div id="tab-hyp" class="tab-content">
+<h2>Testing Hypotheses: Lag-Corrected Statistical Framing</h2>
+<p>This tab preserves the useful v12 hypothesis material without replacing the v10.4 Cross-Validation tab. It is a private-draft interpretation layer for the PDO/ENSO/AR addendum.</p>
+<div class="two-col">
+<div class="card"><h3>H1 — Structural Aridification Trend</h3><p><strong>Supported.</strong> GSL elevation is declining at approximately &minus;0.33 ft/yr over the modern record, with a strong negative trend and very small p-value. This is the baseline structural finding, not a scenario assumption.</p></div>
+<div class="card"><h3>H2 — PDO as Decadal Regime Indicator</h3><p><strong>Supported at decadal scale; null at annual scale.</strong> PDO should be treated as a regime indicator for atmospheric bridge geometry, not a literal annual forcing knob. The useful signal appears in rolling/lagged decadal framing.</p></div>
+<div class="card"><h3>H3 — ENSO via Atmospheric Rivers</h3><p><strong>AR pathway supported; annual SWE correlation remains weak.</strong> ENSO likely matters through AR frequency and intensity, not through a simple annual snowpack mean. This is the mechanism requiring AR-catalog calibration.</p></div>
+<div class="card"><h3>H4 — PDO Suppression Paradox</h3><p><strong>2026 is not a clean 2022&ndash;23 analog.</strong> PDO reached &minus;4.21 in July 2025 and remains cool/negative in the latest official 2026 data. AR multipliers x1.8 and x3.2 are provisional until Chikamoto/AR-catalog calibration.</p></div>
+</div>
+<div class="card">
+<h3>Lag-Corrected Statistical Summary</h3>
+<table class="scenario-tbl">
+<thead><tr><th>Test</th><th>Metric</th><th>Result</th><th>Status</th><th>Timescale</th></tr></thead>
+<tbody>
+<tr><td>H1</td><td>Aridification slope</td><td>&minus;0.33 ft/yr</td><td>Supported</td><td>Annual, 1977&ndash;2025</td></tr>
+<tr><td>H2</td><td>PDO-GSL annual Pearson r</td><td>&minus;0.046; p = 0.76</td><td>Expected null</td><td>Annual</td></tr>
+<tr><td>H2</td><td>PDO-GSL 10-year rolling r</td><td>+0.39; p = 0.009</td><td>Supported</td><td>Quasi-decadal</td></tr>
+<tr><td>H3</td><td>ENSO-SWE annual t-test</td><td>t = &minus;0.14; p = 0.89</td><td>Null; wrong instrument</td><td>Annual</td></tr>
+<tr><td>H4</td><td>AR multiplier concept</td><td>x1.8 vs x3.2</td><td>Provisional</td><td>Seasonal-interannual</td></tr>
+<tr><td>RC</td><td>Forecast skill</td><td>~0.61 at 5-year horizon</td><td>Useful; declines by 2036</td><td>5+ years</td></tr>
+</tbody>
+</table>
+</div>
+<footer>&copy; 2024&ndash;2026 Ian R. Harvey. All Rights Reserved.</footer>
+</div>
+
+<!-- ===================== MODEL & METHODS (TAB 7) ===================== -->
+<div id="tab-methods" class="tab-content">
+<h2>Model &amp; Methods</h2>
+<p>Private-draft methods summary for the v14 simulator. The operational water-budget validation remains the v10.4 Cross-Validation tab; the tables below provide orientation for the updated annual accounting and lag framing.</p>
+<div class="card">
+<h3>RC Circuit Architecture</h3>
+<div class="physics-box">
+GSL elevation = structural baseline + RC-filtered climate signal + annual policy deliveries + lake-effect feedback &minus; evaporation/diversion losses.
+<br><br>
+The watershed behaves as a low-pass hydrologic filter: climate forcing first changes precipitation and storage, then moves through surface routing, soil moisture, groundwater, and finally lake elevation.
+</div>
+<table class="scenario-tbl">
+<thead><tr><th>Term</th><th>v14 Meaning</th></tr></thead>
+<tbody>
+<tr><td>&tau;</td><td>Watershed/lake response time; use 8-ish years for PDO foresight and ~9.3 years for full RC cascade framing.</td></tr>
+<tr><td>PDO</td><td>Quasi-decadal regime indicator, not a direct annual actuator.</td></tr>
+<tr><td>ENSO + AR</td><td>Episodic recharge pathway; multipliers provisional pending AR-catalog calibration.</td></tr>
+<tr><td>Annual accounting</td><td>Preset year-by-year delivery arrays now drive the Simulator forecast.</td></tr>
+<tr><td>Structural baseline gain</td><td>US Magnesium-type avoided depletion tracked separately to avoid double counting.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="two-col">
+<div class="card"><h3>Water Budget Orientation</h3><table class="scenario-tbl"><tbody>
+<tr><td>Mean annual inflow</td><td>~2,400 kAf/yr</td></tr>
+<tr><td>Mean annual evaporation</td><td>~2,450 kAf/yr</td></tr>
+<tr><td>Structural deficit framing</td><td>Use v10.4 cross-validation budget for model closure</td></tr>
+<tr><td>US Magnesium</td><td>~50&ndash;80 kAf/yr historical depletion, now treated as structural gain already realized</td></tr>
+</tbody></table></div>
+<div class="card"><h3>Precipitation Character Transition</h3><p>The snow-fraction anchor is corrected to 80.4% in 1980, declining by about 0.18 percentage points per year. As precipitation becomes more rain- or pulse-dominated, capture efficiency can fall even if annual precipitation totals appear unchanged.</p></div>
+</div>
+<footer>&copy; 2024&ndash;2026 Ian R. Harvey. All Rights Reserved.</footer>
+</div>
+
 <!-- ===================== BATHYMETRY (TAB 5) ===================== -->
 <div id="tab-bathy" class="tab-content">
 <h2>USGS Bathymetry: Elevation &rarr; Area &rarr; Volume</h2>
@@ -744,7 +830,7 @@ DISCLAIMER: Outputs from computer models are subject to uncertainties. The Great
 <!-- ===================== WHITE PAPER (TAB 6) ===================== -->
 <div id="tab-wp" class="tab-content">
 <h2>&#128196; RC Circuit White Paper</h2>
-<p>Full text of <em>Great Salt Lake Water Level Forecasting via RC Circuit Analogy</em> (Harvey, 2026).</p>
+<p>Private embedded v14 draft of <em>Great Salt Lake Water Level Forecasting via RC Circuit Analogy</em> (Harvey, 2026).</p>
 
 <a class="download-box" href="YOUR_PDF_URL" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none">
 <h3>&#128229; Download Full White Paper (PDF)</h3>
@@ -753,18 +839,24 @@ DISCLAIMER: Outputs from computer models are subject to uncertainties. The Great
 </a>
 
 <div class="wp-frame" id="wpContent">
-<h2>Great Salt Lake Water Level Forecasting via RC Circuit Analogy</h2>
-<p><strong>Authors:</strong> Ian R. Harvey, with analytical support from Perplexity AI Deep Research</p>
-<p><strong>Prepared for:</strong> Yoshi Chikamoto (USU), David Tarboton (USU), Paul Brooks (U of U), Ben Abbott (BYU), Joanna Endter-Wada (USU)</p>
-<p><strong>Date:</strong> February 20, 2026 &mdash; Version 1.0 (Draft for Expert Review)</p>
+<h2>Great Salt Lake Water Level Forecasting via RC Circuit Analogy: Lag-Corrected PDO, ENSO, and Atmospheric-River Extension</h2>
+<p><strong>Author:</strong> Ian R. Harvey</p>
+<p><strong>Status:</strong> Private working draft for v14 simulator embedding. Prospective collaborator names are intentionally omitted until participation is separately invited.</p>
+<p><strong>Date:</strong> May 2026 &mdash; v14 private simulator draft</p>
+<p style="font-size:0.86em;color:var(--text-sec)"><strong>AI assistance note:</strong> Earlier research and drafting support included Perplexity AI. Codex assisted with private code integration, planning, and implementation. Final scientific interpretation and authorship remain Ian R. Harvey&rsquo;s.</p>
 
 <h3>1. Introduction</h3>
 <p>The Great Salt Lake (GSL) faces a structural water deficit in which annual inflows fall short of combined evaporation and diversions by approximately 800 kAf/yr. This white paper describes the complete methodology behind the GSL Water Management Simulator, an interactive forecasting tool built on electrical circuit theory.</p>
+<p>The v14 update preserves the v10.4 RC model and Tarboton comparison framework while adding lag-corrected PDO/ENSO/atmospheric-river interpretation, year-specific policy accounting, live-USGS forecast anchoring, and explicit treatment of structural baseline gains already realized.</p>
 
 <h3>1.2 Climate Framing: The Pacific-Basin Multi-Scale Dynamics</h3>
 <p>A critical framing contribution comes from S.-Y. Simon Wang (2026), who cautioned against treating the PDO as an independent external forcing function. Instead, the RC model recognizes the PDO as a convenient &ldquo;voltmeter&rdquo; that integrates a complex chain of tropical&ndash;extratropical coupled dynamics.</p>
 <p>Rather than a standalone driver, the model captures the broad climate variability commonly embedded in the PDO index, which is more accurately viewed as the collective manifestation of: <strong>(1) The Tropical Pacemaker</strong> &mdash; low-frequency shifts in the tropical Pacific that regulate global moisture availability; <strong>(2) The Atmospheric Bridge</strong> &mdash; the physical &ldquo;piping&rdquo; (Pacific&ndash;North American teleconnection) that steers moisture flux toward the Great Basin; <strong>(3) The Integrated Response</strong> &mdash; the chain from tropical circulation to basin soil moisture and groundwater storage naturally produces multi-year lags (~9.3 years) that are &ldquo;very RC-like.&rdquo;</p>
 <p style="font-size:0.85em"><em>The corridor of decadal Pacific influences runs from northern CA to GSL. See Stuivenvolt-Allen et al. (2021, JGR Atmospheres) and Stuivenvolt Allen et al. (2021, Water).</em></p>
+
+<h3>1.3 Current PDO and ENSO Framing for v14</h3>
+<p>Official NOAA/NCEI PDO data show that PDO reached <strong>&minus;4.21 in July 2025</strong> and remained cool/negative in the latest official 2026 data available for this private draft. Therefore v14 describes the near-term climate state as <strong>developing El Ni&ntilde;o into a cool PDO background</strong>, not as a simple repeat of the 2022&ndash;23 compound recharge event.</p>
+<p>The atmospheric-river multipliers used in the supporting notes (<strong>x1.8</strong> for a suppressed 2026-style case and <strong>x3.2</strong> for a stronger 2022&ndash;23-style analog) are treated as <strong>provisional coefficients</strong> pending Chikamoto review and calibration against a stratified atmospheric-river catalog.</p>
 
 <h3>2. RC Circuit Model Framework</h3>
 <table>
@@ -779,8 +871,18 @@ DISCLAIMER: Outputs from computer models are subject to uncertainties. The Great
 <h3>3. Phase Lag Calculation</h3>
 <p>Total system phase lag: ~8 years, consistent with Wang et al. (2010) observed 6&ndash;9 year range.</p>
 
-<h3>7. ENSO Periodicity Coupling (New in v7.6.1)</h3>
-<p><strong>ENSO Periodicity Coupling:</strong> ENSO modifies the effective time constant of the groundwater stage: &tau;<sub>eff</sub> = &tau;<sub>base</sub> &times; (1 &minus; 0.1 &times; ENSO). El Ni&ntilde;o (+2) reduces &tau;<sub>eff</sub> by ~20%, shortening the oscillation period from ~20yr to ~16yr. La Ni&ntilde;a (&minus;2) increases &tau;<sub>eff</sub> by ~20%, lengthening the period to ~24yr. This captures the observed acceleration of recharge following strong El Ni&ntilde;o events (1997&ndash;98, 2015&ndash;16).</p>
+<h3>7. ENSO, PDO, and Atmospheric-River Extension</h3>
+<p>The v10.4 simulator represented ENSO as a compact adjustment to the effective groundwater time constant. The v14 interpretation keeps that mechanism as a scenario knob, but reframes the physical pathway: ENSO primarily changes the probability and intensity of atmospheric-river recharge events, while PDO phase indexes the decadal atmospheric bridge geometry that can amplify or suppress whether those events efficiently reach the Great Basin.</p>
+<p>For policy communication, the lag cascade is split into two visible stages. Stage 1 is the precipitation/streamflow/reservoir signal in the same water year to about +1 year. Stage 2 is the lake-elevation response after watershed routing and storage, approximately +3 years later. Thus a 2026&ndash;27 wet signal can be real while GSL elevation does not show the corresponding response until roughly 2029&ndash;2031.</p>
+
+<h3>7.1 Private Draft Figures</h3>
+<p>The following Perplexity-generated figures are embedded as-is for this private draft. Before any shareable or publication-oriented version, they should be recreated in the v14 visual system without watermarks and with reviewed captions.</p>
+<figure class="wp-figure"><img src="../imported-email/attachments/2.10/c249614b.png" alt="Lag-corrected stochastic fan with precipitation and lake response windows"><figcaption><strong>Figure 1.</strong> Lag-corrected stochastic fan, 2026&ndash;2035, with Stage 1 precipitation-benefit and Stage 2 GSL-response windows.</figcaption></figure>
+<figure class="wp-figure"><img src="../imported-email/attachments/2.12/25dcca36.png" alt="PDO lag verification"><figcaption><strong>Figure 2.</strong> PDO lag verification showing the distinction between six-year and ten-year framing.</figcaption></figure>
+<figure class="wp-figure"><img src="../imported-email/attachments/2.14/cfcf2f02.png" alt="PDO and Great Salt Lake lag correlation sensitivity"><figcaption><strong>Figure 3.</strong> PDO-GSL correlation sensitivity by lag, supporting the distinction between annual noise and decadal-scale coherence.</figcaption></figure>
+<figure class="wp-figure"><img src="../imported-email/attachments/2.16/c2b947db.png" alt="Snow fraction decline"><figcaption><strong>Figure 4.</strong> Snow-fraction decline and corrected historical anchor, relevant to capture efficiency and routing assumptions.</figcaption></figure>
+<figure class="wp-figure"><img src="../imported-email/attachments/2.18/6d0dd7d6.png" alt="PDO ENSO atmospheric river phase matrix"><figcaption><strong>Figure 5.</strong> PDO x ENSO phase matrix and atmospheric-river multiplier concept. Multipliers are provisional pending calibration.</figcaption></figure>
+<figure class="wp-figure"><img src="../imported-email/attachments/2.20/72d49389.png" alt="Recharge opportunity schematic"><figcaption><strong>Figure 6.</strong> 2020&ndash;2060 recharge-opportunity schematic. Useful as a conceptual appendix; assumptions should remain transparent and editable before public use.</figcaption></figure>
 
 <h3>8. Historical Validation</h3>
 <table>
@@ -793,7 +895,7 @@ DISCLAIMER: Outputs from computer models are subject to uncertainties. The Great
 
 <h3>11. Self-Criticism</h3>
 <p><strong>Critical:</strong> Linearity assumption, time-invariance assumption, PDO forecast quality ceiling (~0.5 at 5yr), lumped groundwater representation.</p>
-<p><strong>Moderate:</strong> Quasi-constant evaporation, unverified lever ranges (3 of 7), single-storm lake-effect calibration.</p>
+<p><strong>Moderate:</strong> Quasi-constant evaporation, unverified lever ranges (3 of 7), single-storm lake-effect calibration, and provisional AR multipliers pending external calibration.</p>
 <p><em>The honest answer:</em> At 1&ndash;3 year horizons, yes, with useful confidence. At 5+ years, the value shifts to the probabilistic envelope.</p>
 </div>
 <div class="references">
@@ -878,9 +980,27 @@ DISCLAIMER: Outputs from computer models are subject to uncertainties. The Great
 <footer>&copy; 2024&ndash;2026 Ian R. Harvey. All Rights Reserved.</footer>
 </div>
 
+<!-- ===================== VERSION HISTORY (TAB 12) ===================== -->
+<div id="tab-history" class="tab-content">
+<h2>Version History</h2>
+<div class="card"><h3>v14 Private Draft — May 2026</h3><ul style="margin-left:20px;line-height:1.7">
+<li>Rebuilt from the v10.4 visual and model baseline rather than the failed v12 implementation.</li>
+<li>Added a working educational Overview tab with 1977 context and live-USGS forecast anchoring.</li>
+<li>Moved Combined Model Comparison to Cross-Validation and preserved v10.4 water-budget validation.</li>
+<li>Added preset year-by-year accounting tables that drive the Simulator forecast.</li>
+<li>Added separate structural baseline gain accounting for US Magnesium-type avoided depletion.</li>
+<li>Embedded private-draft PDO/ENSO/AR white-paper figures, with note to recreate before sharing.</li>
+<li>Added Codex assistance citation separate from Ian Harvey authorship.</li>
+</ul></div>
+<div class="card"><h3>v12 and v13 — May 2026</h3><p>Unsuccessful implementation attempts. Useful conceptual material was retained selectively: annual accounting, hypothesis framing, snow-fraction correction, model methods, and version history. The buggy slider/chart behavior was not carried forward.</p></div>
+<div class="card"><h3>v10.4 — March/May 2026 Baseline</h3><p>Gold-standard simulator presentation retained for v14: v10.4 graph styling, uncertainty cone, RC/Tarboton comparison, Damped Oscillator, How It Works, USGS Bathymetry, Glossary, and Data Explorer.</p></div>
+<div class="card"><h3>v9 and Earlier — 2025–2026</h3><p>Initial RC circuit model implementation, seven Strike Team policy levers, water-budget validation, and historical GSL elevation/volume datasets.</p></div>
+<footer>&copy; 2024&ndash;2026 Ian R. Harvey. All Rights Reserved.</footer>
+</div>
+
 <!-- ===================== PRINT REPORT ===================== -->
 <div class="print-report" id="printReport">
-<h2>GSL Simulator v10.4 &mdash; Scenario Report</h2>
+<h2>GSL Simulator v14 &mdash; Scenario Report</h2>
 <p><strong>Generated:</strong> <span id="printDate"></span></p>
 <p><strong>Current Lake State:</strong> ~4,192.1 ft NGVD29</p>
 <div id="printLevers"></div>
@@ -902,6 +1022,7 @@ const FCST_CI=[0.50,0.65,0.85,1.05,1.30,1.55,1.80,2.00,2.15,2.30];
 const HIST_CI=0.8;
 const DANGER=4189;
 const HEALTHY=4198;
+let forecastStartElev=BASELINE[0];
 
 const TARB_BASE_MEAN=[4191.0,4191.05,4191.01,4191.01,4190.97,4190.96,4191.06,4191.08,4191.13,4191.13];
 const TARB_BASE_Q05=[4191.0,4189.44,4188.4,4187.81,4187.43,4187.05,4186.9,4186.85,4186.56,4186.25];
@@ -962,7 +1083,7 @@ function switchTab(id){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   const btns=document.querySelectorAll('.tab-btn');
-  const tabMap={overview:0,sim:1,dosc:2,how:3,xval:4,bathy:5,wp:6,glossary:7,data:8};
+  const tabMap={overview:0,sim:1,dosc:2,how:3,xval:4,hyp:5,methods:6,bathy:7,wp:8,glossary:9,data:10,history:11};
   if(tabMap[id]!==undefined)btns[tabMap[id]].classList.add('active');
   if(id==='overview'&&!overviewChart)initOverviewChart();
   if(id==='sim'&&!simChart)initSimChart();
@@ -1063,7 +1184,7 @@ async function fetchClimateData(){
 function runODE(pdo, enso, totalKaf, noiseArr){
   const tau_fast=1.5,tau_slow_base=20,alpha=0.41,beta=2.75;
   const tau_eff=tau_slow_base*(1-0.1*enso);
-  let elev=OBS_1977[OBS_1977.length-1];
+  let elev=forecastStartElev;
   let V_surface=0,V_gw=0;
   let forecast=[];
   for(let i=0;i<FCST_YEARS.length;i++){
@@ -1078,7 +1199,7 @@ function runODE(pdo, enso, totalKaf, noiseArr){
     let lep=lepYield(area);
     let lepDelta=Math.max(0,lep-BASE_LEP);
     let ramp=Math.min(1.0,(i+1)/3);
-    let leverWater=totalKaf*ramp;
+    let leverWater=Array.isArray(totalKaf)?(totalKaf[i]||0):totalKaf*ramp;
     // v10.4: Apply climate adjustment to evaporation (first year of water year only)
     let climAdj = 0;
     if(climateAdjEnabled && i === 0 && climateAdjRatio !== 1.0){
@@ -1087,7 +1208,7 @@ function runODE(pdo, enso, totalKaf, noiseArr){
       climAdj = -2900 * (climateAdjRatio - 1.0);
     }
     let dV=V_surface/tau_fast+beta*V_gw+leverWater+lepDelta+climAdj;
-    let baseStep=i===0?BASELINE[0]-OBS_1977[OBS_1977.length-1]:(BASELINE[i]-BASELINE[i-1]);
+    let baseStep=i===0?0:(BASELINE[i]-BASELINE[i-1]);
     let dElev=baseStep+dV/capPerFt(elev);
     elev+=dElev;
     elev=Math.max(4182,Math.min(4215,elev));
@@ -1099,7 +1220,7 @@ function runODE(pdo, enso, totalKaf, noiseArr){
 function getForecastDV(pdo, enso, totalKaf){
   const forecast=runODE(pdo, enso, totalKaf, null);
   const dvArr=[];
-  let prevElev=OBS_1977[OBS_1977.length-1];
+  let prevElev=forecastStartElev;
   for(let i=0;i<forecast.length;i++){
     let prevV=volFromElev(i===0?prevElev:forecast[i-1]);
     let curV=volFromElev(forecast[i]);
@@ -1142,6 +1263,171 @@ function getTarbBands(totalKaf){
     q75:TARB_800_Q75.map(v=>Math.round((v+shift)*100)/100),
     q95:TARB_800_Q95.map(v=>Math.round((v+shift)*100)/100)
   };
+}
+
+// ==================== ANNUAL ACCOUNTING PRESETS ====================
+const STRUCTURAL_BASELINE_GAIN_KAF=65;
+const ACCOUNTING_PROFILES={
+  ag:[0.50,0.35,0.25,0.55,0.75,1.00,0.85,0.55,0.65,0.75],
+  mi:[0.25,0.50,0.75,1.00,1.00,1.00,1.00,1.00,1.00,1.00],
+  ph:[0.20,0.40,0.65,0.85,1.00,1.00,1.00,1.00,1.00,1.00],
+  nf:[1.00,0.40,0.15,0.00,0.00,0.00,0.00,0.00,0.00,0.00],
+  mn:[0.50,0.75,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00],
+  rs:[1.00,0.60,0.20,0.00,0.50,0.80,0.30,0.10,0.40,0.60],
+  au:[0.00,0.05,0.10,0.20,0.35,0.50,0.65,0.80,0.90,1.00]
+};
+
+function profileAt(name,i){
+  const p=ACCOUNTING_PROFILES[name];
+  return p[Math.min(i,p.length-1)];
+}
+
+function buildAnnualAccounting(v){
+  return FCST_YEARS.map((year,i)=>{
+    const row={
+      year,
+      ag:Math.round(v.ag*profileAt('ag',i)),
+      mi:Math.round(v.mi*profileAt('mi',i)),
+      ph:Math.round(v.ph*profileAt('ph',i)),
+      nf:Math.round(v.nf*profileAt('nf',i)),
+      mn:Math.round(v.mn*profileAt('mn',i)),
+      rs:Math.round(v.rs*profileAt('rs',i)),
+      au:Math.round(v.au*profileAt('au',i)),
+      structural:STRUCTURAL_BASELINE_GAIN_KAF
+    };
+    row.modeledTotal=row.ag+row.mi+row.ph+row.nf+row.mn+row.rs+row.au;
+    return row;
+  });
+}
+
+function avgAccounting(rows,key){
+  if(!rows.length) return 0;
+  return Math.round(rows.reduce((sum,row)=>sum+(row[key]||0),0)/rows.length);
+}
+
+function currentSimulatorValues(){
+  return {
+    pdo:parseFloat(document.getElementById('pdoSlider').value),
+    enso:parseFloat(document.getElementById('ensoSlider').value),
+    ag:parseInt(document.getElementById('agSlider').value),
+    mi:parseInt(document.getElementById('miSlider').value),
+    ph:parseInt(document.getElementById('phSlider').value),
+    nf:parseInt(document.getElementById('nfSlider').value),
+    mn:parseInt(document.getElementById('mnSlider').value),
+    rs:parseInt(document.getElementById('rsSlider').value),
+    au:parseInt(document.getElementById('auSlider').value)
+  };
+}
+
+function updateAnnualAccounting(rows,forecast){
+  const body=document.getElementById('annualAccountingBody');
+  if(!body) return;
+  body.innerHTML=rows.map((row,i)=>'<tr>'+
+    '<td>'+row.year+'</td>'+
+    '<td>'+row.ag+'</td>'+
+    '<td>'+row.mi+'</td>'+
+    '<td>'+row.ph+'</td>'+
+    '<td>'+row.nf+'</td>'+
+    '<td>'+row.mn+'</td>'+
+    '<td>'+row.rs+'</td>'+
+    '<td>'+row.au+'</td>'+
+    '<td><strong>'+row.modeledTotal+'</strong></td>'+
+    '<td class="accounting-structural">'+row.structural+'</td>'+
+    '<td>'+(forecast[i] ? forecast[i].toFixed(1) : '')+'</td>'+
+  '</tr>').join('');
+}
+
+// ==================== OVERVIEW ====================
+let overviewChart=null;
+
+function getOverviewTotals(){
+  const conservation=parseInt(document.getElementById('overviewConservation')?.value || 0,10);
+  const augmentation=parseInt(document.getElementById('overviewAugmentation')?.value || 0,10);
+  return {conservation,augmentation,total:conservation+augmentation};
+}
+
+function updateOverview(){
+  const cEl=document.getElementById('overviewConservation');
+  const aEl=document.getElementById('overviewAugmentation');
+  if(!cEl || !aEl) return;
+  const v=getOverviewTotals();
+  document.getElementById('overviewConservationVal').textContent=v.conservation+' kAf/yr';
+  document.getElementById('overviewAugmentationVal').textContent=v.augmentation+' kAf/yr';
+  document.getElementById('overviewTotal').textContent=v.total.toLocaleString();
+
+  const pdo=parseFloat(document.getElementById('pdoSlider')?.value || -2.5);
+  const enso=parseFloat(document.getElementById('ensoSlider')?.value || 0);
+  const forecast=runODE(pdo, enso, v.total, null);
+  const finalElev=forecast[forecast.length-1];
+  const gap=Math.max(0,HEALTHY-finalElev);
+  document.getElementById('overview2034').textContent=finalElev.toFixed(1);
+  document.getElementById('overviewGap').textContent=gap.toFixed(1);
+
+  const badge=document.getElementById('overviewStatus');
+  if(finalElev<DANGER){badge.className='badge badge-danger';badge.textContent='\u26A0 Danger <4189';}
+  else if(finalElev<HEALTHY){badge.className='badge badge-warn';badge.textContent='\u26A1 Transitionary';}
+  else{badge.className='badge badge-ok';badge.textContent='\u2713 Healthy Range';}
+
+  if(overviewChart){
+    const hLen=HIST_YEARS.length;
+    const fU=forecast.map((val,i)=>val+FCST_CI[i]);
+    const fL=forecast.map((val,i)=>val-FCST_CI[i]);
+    overviewChart.data.datasets[3].data=[...Array(hLen).fill(null),...fU];
+    overviewChart.data.datasets[4].data=[...Array(hLen).fill(null),...fL];
+    overviewChart.data.datasets[7].data=[...Array(hLen).fill(null),...forecast];
+    overviewChart.update();
+  }
+}
+
+function resetOverview(){
+  document.getElementById('overviewConservation').value=0;
+  document.getElementById('overviewAugmentation').value=0;
+  updateOverview();
+}
+
+function initOverviewChart(){
+  const ctx=document.getElementById('overviewChart').getContext('2d');
+  const allYears=[...HIST_YEARS,...FCST_YEARS];
+  const hLen=HIST_YEARS.length,fLen=FCST_YEARS.length;
+  const allObs=[...OBS_1977,...Array(fLen).fill(null)];
+  const allFit=[...MODEL_1977,...Array(fLen).fill(null)];
+  const overviewForecast=[...Array(hLen).fill(null),...BASELINE];
+  const danger=allYears.map(()=>DANGER);
+  const hU=MODEL_1977.map(v=>v+HIST_CI);
+  const hL=MODEL_1977.map(v=>v-HIST_CI);
+  const fU=BASELINE.map((v,i)=>v+FCST_CI[i]);
+  const fL=BASELINE.map((v,i)=>v-FCST_CI[i]);
+
+  const vertLine={id:'overviewVL',afterDatasetsDraw(chart){
+    const x=chart.scales.x.getPixelForValue(hLen-0.5);
+    chart.ctx.save();chart.ctx.strokeStyle='#999';chart.ctx.setLineDash([5,5]);
+    chart.ctx.lineWidth=1.5;chart.ctx.beginPath();chart.ctx.moveTo(x,chart.scales.y.top);
+    chart.ctx.lineTo(x,chart.scales.y.bottom);chart.ctx.stroke();chart.ctx.restore();
+  }};
+
+  overviewChart=new Chart(ctx,{type:'line',plugins:[vertLine],data:{labels:allYears,datasets:[
+    {label:'Danger Zone',data:danger,borderColor:'transparent',backgroundColor:'rgba(220,53,69,0.08)',fill:'start',pointRadius:0,order:0,spanGaps:true,tension:0.4},
+    {label:'hU',data:[...hU,...Array(fLen).fill(null)],borderColor:'transparent',backgroundColor:'transparent',fill:false,pointRadius:0,order:1,spanGaps:true,tension:0.4},
+    {label:'Historical CI',data:[...hL,...Array(fLen).fill(null)],borderColor:'transparent',backgroundColor:'rgba(32,128,145,0.12)',fill:'-1',pointRadius:0,order:2,spanGaps:true,tension:0.4},
+    {label:'fU',data:[...Array(hLen).fill(null),...fU],borderColor:'transparent',backgroundColor:'transparent',fill:false,pointRadius:0,order:3,spanGaps:true,tension:0.4},
+    {label:'Forecast Uncertainty',data:[...Array(hLen).fill(null),...fL],borderColor:'transparent',backgroundColor:'rgba(255,107,107,0.2)',fill:'-1',pointRadius:0,order:4,spanGaps:true,tension:0.4},
+    {label:'Observed (USGS)',data:allObs,borderColor:'#1a1a1a',borderWidth:2.5,fill:false,tension:0.4,pointRadius:2,pointBackgroundColor:'#1a1a1a',order:5,spanGaps:true},
+    {label:'RC Model Fit',data:allFit,borderColor:'#2196f3',borderWidth:2,fill:false,tension:0.4,pointRadius:0,order:6,spanGaps:true},
+    {label:'Overview Forecast',data:overviewForecast,borderColor:'#ff6b6b',borderWidth:3,borderDash:[5,5],fill:false,tension:0.4,pointRadius:0,order:7,spanGaps:true}
+  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{position:'bottom',labels:{font:{size:10},usePointStyle:false,generateLabels:function(chart){
+      return chart.data.datasets.map((ds,i)=>{
+        if(['hU','fU'].includes(ds.label))return null;
+        return {text:ds.label,fillStyle:ds.borderColor||ds.backgroundColor,strokeStyle:ds.borderColor||'transparent',lineWidth:ds.borderWidth||2,lineDash:ds.borderDash||[],hidden:!chart.isDatasetVisible(i),datasetIndex:i,pointStyle:false};
+      }).filter(Boolean);
+    }}},
+      tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(1)+' ft'}},
+      annotation:{annotations:{dangerLine:{type:'line',yMin:DANGER,yMax:DANGER,borderColor:'rgba(220,53,69,0.5)',borderWidth:1.5,borderDash:[4,4],label:{display:true,content:'4,189 ft Danger',position:'start',backgroundColor:'rgba(220,53,69,0.85)',color:'#fff',font:{size:9}}},healthyLine:{type:'line',yMin:HEALTHY,yMax:HEALTHY,borderColor:'rgba(45,134,89,0.5)',borderWidth:1.5,borderDash:[4,4],label:{display:true,content:'4,198 ft Healthy',position:'end',backgroundColor:'rgba(45,134,89,0.85)',color:'#fff',font:{size:9}}}}}
+    },
+    scales:{y:{title:{display:true,text:'Elevation (ft NGVD29)',font:{size:11,weight:'bold'}},min:4185,max:4215},x:{title:{display:true,text:'Year',font:{size:11,weight:'bold'}},ticks:{maxRotation:45}}}
+  }});
+
+  updateOverview();
 }
 
 // ==================== SIMULATOR ====================
@@ -1239,17 +1525,7 @@ function initSimChart(){
 }
 
 function runSim(){
-  const v={
-    pdo:parseFloat(document.getElementById('pdoSlider').value),
-    enso:parseFloat(document.getElementById('ensoSlider').value),
-    ag:parseInt(document.getElementById('agSlider').value),
-    mi:parseInt(document.getElementById('miSlider').value),
-    ph:parseInt(document.getElementById('phSlider').value),
-    nf:parseInt(document.getElementById('nfSlider').value),
-    mn:parseInt(document.getElementById('mnSlider').value),
-    rs:parseInt(document.getElementById('rsSlider').value),
-    au:parseInt(document.getElementById('auSlider').value)
-  };
+  const v=currentSimulatorValues();
   document.getElementById('pdoVal').textContent=(v.pdo>=0?'+':'')+v.pdo.toFixed(1)+'\u03C3';
   const ensoNames={'-2':'\u22122 (Str. La Ni\u00F1a)','-1.5':'\u22121.5 (Mod. La Ni\u00F1a)','-1':'\u22121 (Wk. La Ni\u00F1a)','-0.5':'\u22120.5 (Wk. La Ni\u00F1a)','0':'0 (Neutral)','0.5':'+0.5 (Wk. El Ni\u00F1o)','1':'+1 (Wk. El Ni\u00F1o)','1.5':'+1.5 (Mod. El Ni\u00F1o)','2':'+2 (Str. El Ni\u00F1o)'};
   document.getElementById('ensoVal').textContent=ensoNames[v.enso.toString()]||v.enso.toFixed(1);
@@ -1261,7 +1537,10 @@ function runSim(){
   document.getElementById('rsVal').textContent=v.rs+' kAf/yr';
   document.getElementById('auVal').textContent=v.au+' kAf/yr';
   const totalKaf=v.ag+v.mi+v.ph+v.nf+v.mn+v.rs+v.au;
-  document.getElementById('totalKaf').textContent=totalKaf;
+  const accounting=buildAnnualAccounting(v);
+  const annualWater=accounting.map(row=>row.modeledTotal);
+  const avgModeledKaf=avgAccounting(accounting,'modeledTotal');
+  document.getElementById('totalKaf').textContent=avgModeledKaf;
   // v10.4: Smarter augmentation warning — subtract other levers from 800 threshold
   const otherLevers = v.ag + v.mi + v.ph + v.nf + v.mn + v.rs;
   const augThreshold = Math.max(0, 800 - otherLevers);
@@ -1291,12 +1570,12 @@ function runSim(){
   });
   document.getElementById('leverMaxWarnings').innerHTML = leverWarnHTML;
 
-  const forecast=runODE(v.pdo, v.enso, totalKaf, null);
+  const forecast=runODE(v.pdo, v.enso, annualWater, null);
   lastForecast=forecast;
   const finalElev=forecast[forecast.length-1];
 
-  lastTarbMean=getTarbMean(totalKaf);
-  lastTarbBands=getTarbBands(totalKaf);
+  lastTarbMean=getTarbMean(avgModeledKaf);
+  lastTarbBands=getTarbBands(avgModeledKaf);
 
   const finalArea=areaFromElev(finalElev);
   const finalLEP=lepYield(finalArea);
@@ -1309,14 +1588,18 @@ function runSim(){
   document.getElementById('lepVal').textContent=finalLEP.toFixed(0);
 
   const leverImpact=k=>k*9/850;
-  document.getElementById('tAg').textContent=v.ag;document.getElementById('eAg').textContent=leverImpact(v.ag).toFixed(1)+' ft';
-  document.getElementById('tMi').textContent=v.mi;document.getElementById('eMi').textContent=leverImpact(v.mi).toFixed(1)+' ft';
-  document.getElementById('tPh').textContent=v.ph;document.getElementById('ePh').textContent=leverImpact(v.ph).toFixed(1)+' ft';
-  document.getElementById('tNf').textContent=v.nf;document.getElementById('eNf').textContent=leverImpact(v.nf).toFixed(1)+' ft';
-  document.getElementById('tMn').textContent=v.mn;document.getElementById('eMn').textContent=leverImpact(v.mn).toFixed(1)+' ft';
-  document.getElementById('tRs').textContent=v.rs;document.getElementById('eRs').textContent=leverImpact(v.rs).toFixed(1)+' ft';
-  document.getElementById('tAu').textContent=v.au;document.getElementById('eAu').textContent=leverImpact(v.au).toFixed(1)+' ft';
-  document.getElementById('tTotal').textContent=totalKaf;
+  const avgAg=avgAccounting(accounting,'ag'),avgMi=avgAccounting(accounting,'mi'),avgPh=avgAccounting(accounting,'ph'),avgNf=avgAccounting(accounting,'nf');
+  const avgMn=avgAccounting(accounting,'mn'),avgRs=avgAccounting(accounting,'rs'),avgAu=avgAccounting(accounting,'au');
+  document.getElementById('tAg').textContent=avgAg;document.getElementById('eAg').textContent=leverImpact(avgAg).toFixed(1)+' ft';
+  document.getElementById('tMi').textContent=avgMi;document.getElementById('eMi').textContent=leverImpact(avgMi).toFixed(1)+' ft';
+  document.getElementById('tPh').textContent=avgPh;document.getElementById('ePh').textContent=leverImpact(avgPh).toFixed(1)+' ft';
+  document.getElementById('tNf').textContent=avgNf;document.getElementById('eNf').textContent=leverImpact(avgNf).toFixed(1)+' ft';
+  document.getElementById('tMn').textContent=avgMn;document.getElementById('eMn').textContent=leverImpact(avgMn).toFixed(1)+' ft';
+  document.getElementById('tRs').textContent=avgRs;document.getElementById('eRs').textContent=leverImpact(avgRs).toFixed(1)+' ft';
+  document.getElementById('tAu').textContent=avgAu;document.getElementById('eAu').textContent=leverImpact(avgAu).toFixed(1)+' ft';
+  document.getElementById('tStructural').textContent=STRUCTURAL_BASELINE_GAIN_KAF;
+  document.getElementById('structuralGain').textContent=STRUCTURAL_BASELINE_GAIN_KAF;
+  document.getElementById('tTotal').textContent=avgModeledKaf;
   const totalElevDelta=finalElev-BASELINE[BASELINE.length-1];
   document.getElementById('eTotal').textContent=totalElevDelta.toFixed(1)+' ft';
   document.getElementById('lepBonus').textContent=(lepDeltaFinal>0?lepDeltaFinal/capPerFt(finalElev)*9:0).toFixed(1)+' ft';
@@ -1335,12 +1618,16 @@ function runSim(){
     simChart.data.datasets[7].data=[...Array(hLen).fill(null),...forecast];
     simChart.update();
   }
+  updateAnnualAccounting(accounting, forecast);
   updateCombinedChart();
+  if(overviewChart) updateOverview();
   if(doscChart2) updateDoscForecast();
 }
 
 function updateCombinedChart(){
   const ctx=document.getElementById('combinedChart');
+  const xvalActive=document.getElementById('tab-xval')?.classList.contains('active');
+  if(!ctx || !xvalActive) return;
   if(combinedChartObj){combinedChartObj.destroy();}
   const showRC=document.getElementById('togRC').checked;
   const showTM=document.getElementById('togTarbMean').checked;
@@ -1357,11 +1644,11 @@ function updateCombinedChart(){
     ds.push({label:'Tarb P25/P75 Band',data:lastTarbBands.q25||TARB_BASE_Q25,borderColor:'transparent',backgroundColor:'rgba(156,39,176,0.08)',fill:'-1',pointRadius:0,order:4,tension:0.3});
   }
   if(showRC){
-    ds.push({label:'RC Deterministic',data:lastForecast,borderColor:'#2196f3',borderWidth:2.5,fill:false,tension:0.4,pointRadius:3,pointBackgroundColor:'#2196f3',order:5});
+    ds.push({label:'RC Deterministic',data:lastForecast.length?lastForecast:BASELINE,borderColor:'#2196f3',borderWidth:2.5,fill:false,tension:0.4,pointRadius:3,pointBackgroundColor:'#2196f3',order:5});
     ds.push({label:'RC Baseline (No Action)',data:BASELINE,borderColor:'#90caf9',borderWidth:1.5,borderDash:[4,4],fill:false,tension:0.4,pointRadius:0,order:6});
   }
   if(showTM){
-    ds.push({label:'Tarboton Mean',data:lastTarbMean,borderColor:'#9c27b0',borderWidth:2.5,fill:false,tension:0.2,pointRadius:3,pointBackgroundColor:'#9c27b0',order:7});
+    ds.push({label:'Tarboton Mean',data:lastTarbMean.length?lastTarbMean:TARB_BASE_MEAN,borderColor:'#9c27b0',borderWidth:2.5,fill:false,tension:0.2,pointRadius:3,pointBackgroundColor:'#9c27b0',order:7});
   }
   combinedChartObj=new Chart(ctx,{type:'line',data:{labels:FCST_YEARS,datasets:ds},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
     plugins:{legend:{position:'bottom',labels:{font:{size:9},usePointStyle:false,generateLabels:function(chart){
@@ -1410,8 +1697,10 @@ function fetchUSGS(){
         const last=ts[ts.length-1];
         const val=parseFloat(last.value).toFixed(1);
         const dt=new Date(last.dateTime);
+        forecastStartElev=parseFloat(val);
         document.getElementById('liveElev').textContent=Number(val).toLocaleString(undefined,{minimumFractionDigits:1});
         document.getElementById('liveTime').textContent='ft NGVD29 \u2022 '+dt.toLocaleDateString()+' '+dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+        runSim();
       }catch(e){console.log('USGS parse error',e)}
     })
     .catch(()=>{
@@ -1560,10 +1849,9 @@ function initDoscChart2(){
   const obsDvPosPadded=[...obsDvPos,...Array(fcstYrs.length).fill(null)];
   const obsDvNegPadded=[...obsDvNeg,...Array(fcstYrs.length).fill(null)];
 
-  const pdo=parseFloat(document.getElementById('pdoSlider').value);
-  const enso=parseFloat(document.getElementById('ensoSlider').value);
-  const totalKaf=parseInt(document.getElementById('agSlider').value)+parseInt(document.getElementById('miSlider').value)+parseInt(document.getElementById('phSlider').value)+parseInt(document.getElementById('nfSlider').value)+parseInt(document.getElementById('mnSlider').value)+parseInt(document.getElementById('rsSlider').value)+parseInt(document.getElementById('auSlider').value);
-  const fcstDV=getForecastDV(pdo,enso,totalKaf);
+  const v=currentSimulatorValues();
+  const annualWater=buildAnnualAccounting(v).map(row=>row.modeledTotal);
+  const fcstDV=getForecastDV(v.pdo,v.enso,annualWater);
   const extraDV=fcstDV.length>1?fcstDV[fcstDV.length-1]*0.95:0;
   const fcstDVext=[...fcstDV,extraDV];
   const fcstDVpadded=[...Array(yrs2obs.length).fill(null),...fcstDVext.slice(1)];
@@ -1608,10 +1896,9 @@ function initDoscChart2(){
 
 function updateDoscForecast(){
   if(!doscChart2) return;
-  const pdo=parseFloat(document.getElementById('pdoSlider').value);
-  const enso=parseFloat(document.getElementById('ensoSlider').value);
-  const totalKaf=parseInt(document.getElementById('agSlider').value)+parseInt(document.getElementById('miSlider').value)+parseInt(document.getElementById('phSlider').value)+parseInt(document.getElementById('nfSlider').value)+parseInt(document.getElementById('mnSlider').value)+parseInt(document.getElementById('rsSlider').value)+parseInt(document.getElementById('auSlider').value);
-  const fcstDV=getForecastDV(pdo,enso,totalKaf);
+  const v=currentSimulatorValues();
+  const annualWater=buildAnnualAccounting(v).map(row=>row.modeledTotal);
+  const fcstDV=getForecastDV(v.pdo,v.enso,annualWater);
   const extraDV=fcstDV.length>1?fcstDV[fcstDV.length-1]*0.95:0;
   const fcstDVext=[...fcstDV,extraDV];
   const obsLen=FULL_YEARS.slice(FULL_YEARS.indexOf(1980)).length;
@@ -1659,7 +1946,8 @@ function downloadCSV(){
 
 // ==================== INIT ====================
 window.addEventListener('load',()=>{
-  initSimChart();
+  initOverviewChart();
+  runSim();
   fetchUSGS();
   if(climateAdjEnabled) fetchClimateData();
 });
