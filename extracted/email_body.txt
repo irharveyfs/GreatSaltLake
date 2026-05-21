@@ -1,0 +1,54 @@
+From: Ian Harvey <irharveyfs@gmail.com>
+To: Nephi Harvey <ntharvey@icloud.com>
+Subject: For digestion by CODEX...
+Date: Wed, 20 May 2026 22:53:07 -0600
+Message-Id: <86808D0B-989A-40B6-AD55-FC005F5CE0BA@gmail.com>
+
+Hi Nephi,
+
+Please use the following prompt alongside these attached files, and see what CODEX comes up with.  Thanks!
+
+—b
+￼
+
+￼￼￼
+Statistic	Value	Domain	Variable measured	Clock starts at	Includes hydro routing?
+Physical lag chain	3 + 3 = 6	Physical/mechanistic	Precip → GSL	Watershed gauge	Yes (IS the routing)
+Spectral coherence phase	7.2 ± 1.5 yr	Frequency domain	PDO → GSL (bandpassed)	Pacific SST	Yes (full chain)
+Cross-correlation peak	7 yr	Time domain	PDO → GSL dV/dt	Pacific SST	Partial (derivative)
+FFT dominant period	8 yr	Frequency domain	Resonant oscillation of GSL dV/dt	Not a lag (period)	N/A
+Gillies Eq.1 dominant term	8 yr	Regression	PDO → GSL elevation tendency	Pacific SST	Yes (full chain)
+￼￼￼￼￼￼
+
+I would like to create a v14 elevation simulator based on the gold standard v.10.4, with some upgrades conceptually found in attached v12.  But v.12 is quite buggy and I mostly don’t like it.   Codex, your job, if you choose to accept it, is to take what is good from somebody else’s code in v10.4, leave alone the tabs that are unaffected by the integration of the new PDO/ENSO connections and the policy levers, and upgrade it as described below.
+
+This will require you in the planning phase to deeply analyze and critique each of the technical assertions embedded mathematically in the code, described in the text and displayed graphically.  (and check for self consistency) If satisfied, proceed with planning the next version. If concerned, itemize each inconsistency or falsehood and let’s talk.
+
+Note that I am fond of the current styling of v10.4, its presentation and its graphics, especially how it compares the Tarboton stochastic analysis to the determinative prediction.
+
+The goal is that we want to create a simulator that is largely the same as the vetted v10.4, but that accounts for the new mathematical modifications as described in the attached papers.  We’ll be more confident if it is successful if we see a lake elevation bump in 2029-2030.  Note that the attached v.12 failed in this regard.
+
+A couple of other changes we are planning in this version, that were at least partially successful in the attached v12 (please review all materials, come back with a plan and any clarifying questions):
+
+(1) create a simplified first tab without a lot of technical clutter, but that has just two levers: conservation and augmentation. This will be used for education purposes.  It should span the same time period as the main simulator tab, and show the same uncertainty envelope around the forecast.
+2) Then the current simulator tab can move to the second tab position with the following changes: Move the Combined model comparison with its blue and red explanation boxes to the top of the cross-validation tab.
+3) Place the strike team policy levers below the graph on the simulator tab and for each lever we need to enable a year-by-year accounting methodology, because there is no way any particular lever can deliver a consistent amount of water as the source constantly changes. e.g., ag optimization and leasing will only work following good water years. Like this year, the streams are dry but reservoirs still have banked water. So water rights may be diverted from storage systems to GSL. But if the next year is also dry, that strategy is screwed. Likewise, Newfoundland has water this year, but if we bring it back to the lake, then that is a one-time benefit. Mineral extraction at USMag has ceased. so we are not drawing that water out. But accounting wise, I guess we get to count it every year. Similarly phragmites...
+
+This turn,
+(1) Please read and modify the RC white paper embedded in v.10.4 and update according to the addendum and documents attached here.  This new document will be needed to support the v14 upcoming, in a similar embedded fashion.   Compare your version to the one embedded in v12, and let’s discuss any major differences.
+
+(2) create a plan for implementing the new v14 simulator
+
+From v. 10.4 Please keep the  following tabs intact: Damped Oscillator, how it works, USGS bathymetry, Glossary, Data explorer
+
+From V12, keep the “water budget” tab, the model and methods, and the version history tab, noting that v.10 was in March, 2026. v12 and v13 were unsuccessful attempts to implement the above changes.  On v.14, please add an appropriate citation for the efforts by Codex, augmenting what has previously been done in Perplexity.
+
+(3) please note that the RC white paper should just have my authorship without reference to anyone else yet. I still need to separately invite their participation.
+
+Attached find some graphs that belong embedded in the white paper, which in turn, should be embedded in the clickable HTML elevation simulator app.  If, in your questioning and planning phase, you find they are better suited embedded into a different tab, I will certainly entertain your suggestion.  I’ll also entertain your recommendation on re-ordering the tabs for better logical flow.
+
+Below find some random notes from the failed v12-13 threads that may or may not be helpful as you plan your approach.  They should be used in guiding, not determining your direction and outcomes, But they may be helpful in framing questions that I can answer in the first turn.
+
+On the Overview tab, I change the sliders and nothing changes on the graph.  does it work?  I would also like the graph to begin at 1977 for context.  The intent was that this should be a simplified version of the main simulator  On the simulator tab I like the graphical presentation of v10.4, particularly becasue of the uncertainty cone surrounding the projection.  On V12, again, I don’t see that any of the policy levers actually have an effect on the projection, either from the slider or from the annual accounting tabs.  Please verify that these are working, and if they are, please implement the v12 annual accounting (and the new PDO-ENSO correlation) into the v10.4 visualization. On the Cross-validation tab, this tab name applies to the V10.4, which we will keep.  The v12 cross validation tab will be retained in v14 but renamed as “Testing Hypotheses”.  NOTE here that the table in this tab indicates 61% skill for forecasting in the five year horizon.  We want to forecast out to the 2036 horizon and let the uncertainty cone expand accordingly.
+
+Some clarifications: the purpose of the Overview tab is to provide a very simple entry point, useful for educational purposes and implementing the RC enabled forecasting but without the other distractions. Q2: yes, 2034 is a milestone marker. The 2026 PDO/ENSO effects are expected to be lagged to 2030-31, correct? yes, note the skill % drop at 2036. Q3: So the annual accounting functions only apply in the "simulator" tab. Please verify that any changes to any of the years would be reflected both in downstream effects from the same lever, as well as manifest in the total trend (yes, "drive" per you 3(c) question). I expect that one-time changes (reservoir release etc) will not make a huge difference, but phragmites and mineral changes will reflect every year. Q4: I think the PDO/ENSO should be fixed according to our best understanding of the current state (or the combined ENSO now with the state of PDO 3+3 years ago. We already look at the weather, so we should do a real-time check of the PDO /ENSO. Now, what may be valuable would be to change these in the timeframe beyond the known (spring 2027 for ENSO, post 3+3 for PDO?) that would enable some scenario based forecasting beyond the known window. Can you come up with a way to do that? Q5: Are you saying that v10.4 thought the then-current elevation was 4192? If so, then yes, definitely update this. Q6: on versioning: yes v10 in March. Skip v.12 documentation and incorporate the PDO/ENSO integration into V13.

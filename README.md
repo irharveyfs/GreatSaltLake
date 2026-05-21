@@ -8,11 +8,13 @@ Open `index.html` in a browser. It redirects to `gsl-simulator-v14.html`, which 
 
 The simulator loads Chart.js and the Chart.js annotation plugin from jsDelivr.
 
-## GitHub Pages
+## Private Repository
 
-After this repository is pushed to GitHub, enable GitHub Pages from the repository settings and use the `main` branch with the repository root as the publishing source.
+This project is intended for a private GitHub repository owned by Ian Harvey. Do not enable GitHub Pages unless the simulator is meant to become public. On GitHub Free, GitHub Pages is for public repositories; private-repository Pages publishing requires a paid plan.
 
-## Private Materials
+## Credentials
 
-The imported email, extracted research materials, and private planning dossier are intentionally ignored and should not be committed.
+Do not commit GitHub passwords, personal access tokens, SSH private keys, `.env` files, or other credentials. Ian should store GitHub credentials in the macOS Keychain, GitHub CLI, or the SSH agent on his personal Mac.
+
+See `GITHUB_SETUP.md` for the private GitHub account and upload handoff.
 

@@ -1,0 +1,57 @@
+📄 RC Circuit White Paper
+Full text of Great Salt Lake Water Level Forecasting via RC Circuit Analogy (Harvey, 2026).
+
+📥 Download Full White Paper (PDF)
+GSL-RC-Circuit-White-Paper — Complete 13-section document with all equations, schematics, and bibliography
+Click to open (replace URL with Google Drive link when deploying)
+
+Great Salt Lake Water Level Forecasting via RC Circuit Analogy
+Authors: Ian R. Harvey, with analytical support from Perplexity AI Deep Research
+Prepared for: Yoshi Chikamoto (USU), David Tarboton (USU), Paul Brooks (U of U), Ben Abbott (BYU), Joanna Endter-Wada (USU)
+Date: February 20, 2026 — Version 1.0 (Draft for Expert Review)
+
+1. Introduction
+The Great Salt Lake (GSL) faces a structural water deficit in which annual inflows fall short of combined evaporation and diversions by approximately 800 kAf/yr. This white paper describes the complete methodology behind the GSL Water Management Simulator, an interactive forecasting tool built on electrical circuit theory.
+
+1.2 Climate Framing: The Pacific-Basin Multi-Scale Dynamics
+A critical framing contribution comes from S.-Y. Simon Wang (2026), who cautioned against treating the PDO as an independent external forcing function. Instead, the RC model recognizes the PDO as a convenient “voltmeter” that integrates a complex chain of tropical–extratropical coupled dynamics.
+Rather than a standalone driver, the model captures the broad climate variability commonly embedded in the PDO index, which is more accurately viewed as the collective manifestation of: (1) The Tropical Pacemaker — low-frequency shifts in the tropical Pacific that regulate global moisture availability; (2) The Atmospheric Bridge — the physical “piping” (Pacific–North American teleconnection) that steers moisture flux toward the Great Basin; (3) The Integrated Response — the chain from tropical circulation to basin soil moisture and groundwater storage naturally produces multi-year lags (~9.3 years) that are “very RC-like.”
+The corridor of decadal Pacific influences runs from northern CA to GSL. See Stuivenvolt-Allen et al. (2021, JGR Atmospheres) and Stuivenvolt Allen et al. (2021, Water).
+
+2. RC Circuit Model Framework
+
+Hydraulic QuantityElectrical AnalogGSL Example
+Water volumeCharge (Q)4.9–10 MAf
+Water elevationVoltage (V)4190–4223 ft
+Flow rateCurrent (I)~2,000 kAf/yr
+Storage capacityCapacitance (C)~340 kAf/ft (varies)
+Evaporation/diversionsResistance (R)~0.03 yr/kAf
+
+3. Phase Lag Calculation
+Total system phase lag: ~8 years, consistent with Wang et al. (2010) observed 6–9 year range.
+
+7. ENSO Periodicity Coupling (New in v7.6.1)
+ENSO Periodicity Coupling: ENSO modifies the effective time constant of the groundwater stage: τeff = τbase × (1 − 0.1 × ENSO). El Niño (+2) reduces τeff by ~20%, shortening the oscillation period from ~20yr to ~16yr. La Niña (−2) increases τeff by ~20%, lengthening the period to ~24yr. This captures the observed acceleration of recharge following strong El Niño events (1997–98, 2015–16).
+
+8. Historical Validation
+
+MetricValue
+RMS Error (1980–2024)0.5 ft
+1986 Peak residual0.28 ft
+2024 Current residual0.35 ft
+Correlation r (at 5-yr horizon)0.61
+
+11. Self-Criticism
+Critical: Linearity assumption, time-invariance assumption, PDO forecast quality ceiling (~0.5 at 5yr), lumped groundwater representation.
+Moderate: Quasi-constant evaporation, unverified lever ranges (3 of 7), single-storm lake-effect calibration.
+The honest answer: At 1–3 year horizons, yes, with useful confidence. At 5+ years, the value shifts to the probabilistic envelope.
+
+References — White Paper
+Harvey, I. R. (2026). GSL Water Level Forecasting via RC Circuit Analogy. White Paper v1.0.
+Wang, S.-Y. et al. (2010). Coherence between GSL level and Pacific quasi-decadal oscillation. J. Climate, 23(20).
+Wang, S.-Y. & Gillies, R. R. (2012). Multi-decadal drought cycles in the Great Basin. J. Climate, 25(5).
+Stuivenvolt-Allen, J. et al. (2021). Atmospheric rivers impacting northern CA exhibit quasi-decadal frequency. JGR: Atmospheres.
+Stuivenvolt Allen, J. et al. (2021). Water availability for cannabis in northern CA. Water, 13(1), 5.
+Brooks, P. D. et al. (2021). Periodic variability in baseflow. J. AWRA.
+
+© 2024–2026 Ian R. Harvey. All Rights Reserved.

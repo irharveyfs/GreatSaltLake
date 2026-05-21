@@ -1,0 +1,29 @@
+Great Salt Lake Water Budget (1989–2024)
+
+    ~2,400Mean Annual InflowkAF/yr (1989–2024)
+    ~2,450Mean Annual EvaporationkAF/yr (1989–2024)
+    ~−50Mean Net BudgetkAF/yr structural deficit
+
+    Annual Water Budget Components
+
+      Inflow Sources
+
+        SourceEst. kAF/yr% of total
+
+          Bear River~1,000~41%
+          Jordan River~560~23%
+          Weber River~330~14%
+          Minor tribs & direct precip~510~22%
+
+      Demand & Loss Structure
+
+        CategoryEst. kAF/yrStatus
+
+          Lake evaporation~2,300–2,600Increasing (+warming)
+          Agricultural diversions~1,200–1,500Target for leasing
+          M&I use (Wasatch Front)~300–400Conservation potential
+          US Magnesium (ceased ~2021)~0 (was 50–80)Permanent structural gain
+          Phragmites ET loss~100–180Removal underway
+
+    Precipitation Character Transition
+    The 1980 snow fraction baseline of 80.4% is declining at −0.18%/yr (FigD, corrected from prior 84% anchor). Below ~65–70% snow fraction, the dominant recharge mechanism shifts from sustained snowmelt hydrology to episodic pulse events with lower reservoir capture efficiency. This threshold has infrastructure implications: conveyance systems and reservoir operating rules designed for snowmelt become suboptimal for pulse-dominated hydrology. At the current rate, the threshold is reached approximately 2053–2058 absent acceleration. Policy interventions must address both volume delivered AND capture mode simultaneously.

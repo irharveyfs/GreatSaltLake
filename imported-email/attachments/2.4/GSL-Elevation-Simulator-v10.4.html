@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GSL Elevation Simulator v14</title>
+<title>GSL Elevation Simulator v10.4</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
 <style>
@@ -31,15 +31,6 @@ header p{font-size:0.95em;opacity:0.92;max-width:900px;margin:8px auto 0}
 .tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);background:rgba(32,128,145,0.08)}
 .tab-content{display:none;padding:30px 40px;min-height:600px}
 .tab-content.active{display:block}
-.overview-grid{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:24px;align-items:stretch}
-.overview-panel{background:#fafafa;border:1px solid var(--border);border-radius:8px;padding:20px}
-.overview-panel h3{color:var(--primary);margin-top:0}
-.overview-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-.overview-kpi{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
-.overview-kpi h4{font-size:0.74em;color:var(--text-sec);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px}
-.overview-kpi .kpi-val{font-size:1.55em;font-weight:700;color:var(--primary)}
-.overview-note{background:#e8f4f8;border-left:4px solid var(--primary);border-radius:4px;padding:10px 14px;font-size:0.84em;color:var(--text-sec);margin-top:12px}
-@media(max-width:1050px){.overview-grid{grid-template-columns:1fr}.overview-kpis{grid-template-columns:1fr}}
 h2{font-size:1.3em;color:var(--primary);margin-bottom:15px;border-bottom:2px solid var(--primary);padding-bottom:8px}
 h3{font-size:1.1em;color:var(--text);margin:18px 0 10px}
 p{margin-bottom:12px;font-size:0.95em}
@@ -184,13 +175,12 @@ footer{padding:12px;text-align:center;font-size:0.78em;color:var(--text-sec);bac
 <body>
 <div class="app">
 <header>
-<h1>&#127754; GSL Elevation Simulator v14</h1>
-<p>Education Overview &bull; Strike Team Policy Levers &bull; Year-by-Year Accounting &bull; Lag-Corrected PDO/ENSO/AR Framework &bull; Tarboton Stochastic Envelope &bull; USGS NGVD29 Bathymetry</p>
+<h1>&#127754; GSL Elevation Simulator v10.4</h1>
+<p>Strike Team Policy Levers &bull; Nonlinear Lake-Effect Feedback &bull; RC Circuit Forced Damped Oscillator &bull; ENSO Periodicity Coupling &bull; Tarboton Stochastic Envelope &bull; USGS NGVD29 Bathymetry &bull; Real-Time Climate Adjustment</p>
 </header>
 
 <div class="tab-bar">
-<button class="tab-btn active" onclick="switchTab('overview')">&#127919; Overview</button>
-<button class="tab-btn" onclick="switchTab('sim')">&#127899;&#65039; Simulator</button>
+<button class="tab-btn active" onclick="switchTab('sim')">&#127899;&#65039; Simulator</button>
 <button class="tab-btn" onclick="switchTab('dosc')">&#128300; Damped Oscillator</button>
 <button class="tab-btn" onclick="switchTab('how')">&#128214; How It Works</button>
 <button class="tab-btn" onclick="switchTab('xval')">&#9989; Cross-Validation</button>
@@ -200,43 +190,8 @@ footer{padding:12px;text-align:center;font-size:0.78em;color:var(--text-sec);bac
 <button class="tab-btn" onclick="switchTab('data')">&#128202; Data Explorer</button>
 </div>
 
-<!-- ===================== OVERVIEW (TAB 1 - EDUCATION) ===================== -->
-<div id="tab-overview" class="tab-content active">
-<h2>Great Salt Lake Recovery Overview</h2>
-<p>A simplified education view using the same v10.4 forecast engine and uncertainty envelope. Conservation aggregates the non-augmentation Strike Team levers; augmentation maps to new water augmentation.</p>
-<div class="overview-grid">
-<div class="overview-panel">
-<h3>Two Recovery Levers</h3>
-<div class="slider-row">
-<div class="slider-hdr"><span>Conservation Bundle</span><span class="slider-val" id="overviewConservationVal">0 kAf/yr</span></div>
-<input type="range" id="overviewConservation" min="0" max="710" step="10" value="0" oninput="updateOverview()">
-<div class="slider-note">0&ndash;710 kAf/yr, tied to v10.4 non-augmentation lever range</div>
-</div>
-<div class="slider-row" style="margin-top:16px">
-<div class="slider-hdr"><span>New Water Augmentation</span><span class="slider-val" id="overviewAugmentationVal">0 kAf/yr</span></div>
-<input type="range" id="overviewAugmentation" min="0" max="1500" step="50" value="0" oninput="updateOverview()">
-<div class="slider-note">0&ndash;1,500 kAf/yr, tied to v10.4 augmentation range</div>
-</div>
-<button class="btn btn-outline btn-block" onclick="resetOverview()" style="margin-top:14px">&#8634; Reset Overview</button>
-<div class="overview-note">This tab keeps the policy story simple. The Simulator tab keeps the full lever detail and will receive the preset year-by-year accounting tables in the next implementation slice.</div>
-</div>
-<div class="card" style="margin:0">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-<h3 style="margin:0">Elevation Context and Forecast (1977&ndash;2034)</h3>
-<span id="overviewStatus" class="badge badge-danger">&#9888; Danger &lt;4189</span>
-</div>
-<div style="position:relative;height:470px"><canvas id="overviewChart"></canvas></div>
-<div class="overview-kpis">
-<div class="overview-kpi"><h4>Total Action</h4><div class="kpi-val" id="overviewTotal">0</div><div class="stat-sub">kAf/yr</div></div>
-<div class="overview-kpi"><h4>2034 Projection</h4><div class="kpi-val" id="overview2034">4189.4</div><div class="stat-sub">ft NGVD29</div></div>
-<div class="overview-kpi"><h4>Gap to Target</h4><div class="kpi-val" id="overviewGap">8.6</div><div class="stat-sub">ft below 4,198</div></div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- ===================== SIMULATOR (TAB 2) ===================== -->
-<div id="tab-sim" class="tab-content">
+<!-- ===================== SIMULATOR (TAB 1 - HOME) ===================== -->
+<div id="tab-sim" class="tab-content active">
 <div class="sim-grid">
 <div class="ctrl-panel">
 <div class="ctrl-group">
@@ -327,6 +282,43 @@ footer{padding:12px;text-align:center;font-size:0.78em;color:var(--text-sec);bac
 <div class="hover-popup cone-popup" id="conePopup"><strong>&#128200; Forecast Uncertainty Cone</strong><br>The pink cone shows forecast confidence &mdash; narrow near-term (high confidence), widening to &plusmn;2.5 ft by 2034. Width reflects compounding uncertainty in climate forcing, management decisions, and natural variability.</div>
 <div class="hover-popup danger-popup" id="dangerPopup"><strong>&#9888; Ecological Danger Zone (&lt;4,189 ft)</strong><br>Below 4,189 ft NGVD29: salinity exceeds 17%, microbialite reefs die off, brine shrimp food web collapses, migratory bird habitat is critically impaired. The lake transitions from ecosystem to salt flat.</div>
 </div>
+
+<!-- Combined Model Comparison Chart -->
+<div class="card" style="margin-top:15px">
+<h3>&#128202; Combined Model Comparison (2025&ndash;2034)</h3>
+<div class="toggle-row">
+<label><input type="checkbox" id="togRC" checked onchange="updateCombinedChart()"> RC Deterministic</label>
+<label><input type="checkbox" id="togTarbMean" checked onchange="updateCombinedChart()"> Tarboton Mean</label>
+<label><input type="checkbox" id="togTarbP5P95" onchange="updateCombinedChart()"> Tarboton P5/P95</label>
+<label><input type="checkbox" id="togTarbP25P75" checked onchange="updateCombinedChart()"> Tarboton P25/P75</label>
+</div>
+<div style="position:relative;height:380px"><canvas id="combinedChart"></canvas></div>
+</div>
+
+<!-- Model Explanation Cards -->
+<div class="model-explain">
+<div class="model-card model-card-rc">
+<h4>&#128268; PDO-Coherent Forecast (RC Circuit Model)</h4>
+<p>Uses the observed PDO index and calibrated RC circuit physics to produce a <strong>single best-estimate</strong> trajectory. The model exploits the ~8-year teleconnection lag between Pacific climate and GSL response.</p>
+<ul>
+<li><strong>Strength:</strong> Captures quasi-periodic oscillation signal &mdash; timing of recharge pulses</li>
+<li><strong>Limitation:</strong> Single trajectory; ~60% skill at 5 yr declining to ~40% at 10 yr</li>
+<li><strong>Best for:</strong> &ldquo;When will the next recharge arrive?&rdquo; &mdash; timing questions</li>
+</ul>
+<p style="font-size:0.82em;margin-top:8px">Full derivation: <span class="tab-link" onclick="switchTab('wp')">RC Circuit White Paper</span> tab</p>
+</div>
+<div class="model-card model-card-mc">
+<h4>&#127922; Tarboton Stochastic Envelope (k-NN Resampling)</h4>
+<p>Based on Tarboton (2025) methodology: 1,000 stochastic simulations using k-nearest-neighbor resampling of historical climate sequences. This is a <strong>purely statistical model</strong> &mdash; it does not use the RC circuit physics or PDO coherence. The straight mean line reflects a stationary climate assumption.</p>
+<ul>
+<li><strong>Strength:</strong> Shows the full range of physically plausible outcomes</li>
+<li><strong>Limitation:</strong> Does not capture PDO regime timing or oscillation structure</li>
+<li><strong>Best for:</strong> &ldquo;How bad could it get?&rdquo; / &ldquo;Is the floor above 4,189?&rdquo; &mdash; risk questions</li>
+</ul>
+<p style="font-size:0.82em;margin-top:8px">Source: <a class="ext-link" href="https://d36oiwf74r1rap.cloudfront.net/wp-content/uploads/2026/01/GSL-Jan2026.pdf" target="_blank" rel="noopener noreferrer">GSL Strike Team 2026 Data &amp; Insights Summary</a></p>
+</div>
+</div>
+<div class="bridge-note">These are not competing models &mdash; the Tarboton envelope shows the <strong>range of outcomes</strong> while the RC forecast shows the <strong>most likely trajectory</strong>.</div>
 </div>
 
 <div class="stats-area">
@@ -573,43 +565,6 @@ DISCLAIMER: Outputs from computer models are subject to uncertainties. The Great
 <div id="tab-xval" class="tab-content">
 <h2>Cross-Validation: Annual Great Salt Lake Water Budget (kAf)</h2>
 <p>Overlaying the GSL Strike Team&rsquo;s front-end accounting budget (inflow-evaporation) with the independently computed USGS NGVD29 back-end measurement budget. The close agreement confirms water budget closure and validates the volume change (&Delta;V) estimates used by the RC model.</p>
-
-<!-- Combined Model Comparison Chart -->
-<div class="card" style="margin-top:15px">
-<h3>&#128202; Combined Model Comparison (2025&ndash;2034)</h3>
-<div class="toggle-row">
-<label><input type="checkbox" id="togRC" checked onchange="updateCombinedChart()"> RC Deterministic</label>
-<label><input type="checkbox" id="togTarbMean" checked onchange="updateCombinedChart()"> Tarboton Mean</label>
-<label><input type="checkbox" id="togTarbP5P95" onchange="updateCombinedChart()"> Tarboton P5/P95</label>
-<label><input type="checkbox" id="togTarbP25P75" checked onchange="updateCombinedChart()"> Tarboton P25/P75</label>
-</div>
-<div style="position:relative;height:380px"><canvas id="combinedChart"></canvas></div>
-</div>
-
-<!-- Model Explanation Cards -->
-<div class="model-explain">
-<div class="model-card model-card-rc">
-<h4>&#128268; PDO-Coherent Forecast (RC Circuit Model)</h4>
-<p>Uses the observed PDO index and calibrated RC circuit physics to produce a <strong>single best-estimate</strong> trajectory. The model exploits the ~8-year teleconnection lag between Pacific climate and GSL response.</p>
-<ul>
-<li><strong>Strength:</strong> Captures quasi-periodic oscillation signal &mdash; timing of recharge pulses</li>
-<li><strong>Limitation:</strong> Single trajectory; ~60% skill at 5 yr declining to ~40% at 10 yr</li>
-<li><strong>Best for:</strong> &ldquo;When will the next recharge arrive?&rdquo; &mdash; timing questions</li>
-</ul>
-<p style="font-size:0.82em;margin-top:8px">Full derivation: <span class="tab-link" onclick="switchTab('wp')">RC Circuit White Paper</span> tab</p>
-</div>
-<div class="model-card model-card-mc">
-<h4>&#127922; Tarboton Stochastic Envelope (k-NN Resampling)</h4>
-<p>Based on Tarboton (2025) methodology: 1,000 stochastic simulations using k-nearest-neighbor resampling of historical climate sequences. This is a <strong>purely statistical model</strong> &mdash; it does not use the RC circuit physics or PDO coherence. The straight mean line reflects a stationary climate assumption.</p>
-<ul>
-<li><strong>Strength:</strong> Shows the full range of physically plausible outcomes</li>
-<li><strong>Limitation:</strong> Does not capture PDO regime timing or oscillation structure</li>
-<li><strong>Best for:</strong> &ldquo;How bad could it get?&rdquo; / &ldquo;Is the floor above 4,189?&rdquo; &mdash; risk questions</li>
-</ul>
-<p style="font-size:0.82em;margin-top:8px">Source: <a class="ext-link" href="https://d36oiwf74r1rap.cloudfront.net/wp-content/uploads/2026/01/GSL-Jan2026.pdf" target="_blank" rel="noopener noreferrer">GSL Strike Team 2026 Data &amp; Insights Summary</a></p>
-</div>
-</div>
-<div class="bridge-note">These are not competing models &mdash; the Tarboton envelope shows the <strong>range of outcomes</strong> while the RC forecast shows the <strong>most likely trajectory</strong>.</div>
 
 <div class="card">
 <h3>Three-Way &Delta;V Cross-Validation (1930&ndash;2025)</h3>
@@ -962,13 +917,11 @@ function switchTab(id){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   const btns=document.querySelectorAll('.tab-btn');
-  const tabMap={overview:0,sim:1,dosc:2,how:3,xval:4,bathy:5,wp:6,glossary:7,data:8};
+  const tabMap={sim:0,dosc:1,how:2,xval:3,bathy:4,wp:5,glossary:6,data:7};
   if(tabMap[id]!==undefined)btns[tabMap[id]].classList.add('active');
-  if(id==='overview'&&!overviewChart)initOverviewChart();
   if(id==='sim'&&!simChart)initSimChart();
   if(id==='how'&&!howDoscChart)initHowDoscChart();
   if(id==='xval'&&!xvalChart){initXvalChart();initScenarioChart();initPerfChart();}
-  if(id==='xval')updateCombinedChart();
   if(id==='dosc'&&!doscChart2)initDoscChart2();
   if(id==='data'&&!dataLoaded)loadDataTable();
 }

@@ -1,0 +1,44 @@
+Version History
+
+    v12May 13, 2026
+
+      Year-by-year accounting tables extended from 2034 to 2036 for all seven Strike Team levers
+      Simulator trajectory chart window extended to 2036 (from 2034); KPI updated to display 2036 projection
+      All six tabs fully restored with complete content; conversational/personal references removed
+      Water Budget tab restored with full inflow/demand tables and precipitation character transition analysis
+      Cross-Validation tab: Combined Model Comparison explanation boxes and chart restored to top position
+      Annotated bibliography expanded to 11 entries with full contribution annotations
+      AI Methodology Statement updated to reflect v12 scope
+
+    v11.1May 11, 2026
+
+      PDO Suppression Paradox formally integrated: AR multiplier ×1.8 (2026) vs. ×3.2 (2023 analog) with quantitative basis
+      Two-stage lag cascade implemented: Stage 1 (precipitation) immediate; Stage 2 (GSL elevation) +3 yr lag
+      Snow fraction anchor corrected from 84% to 80.4% (FigD correction)
+      Year-by-year accounting tables added to all Strike Team levers (through 2034)
+      Accounting type badges added: Ongoing/Stable, Wet-Year Dependent, One-Time Credit, Buildout Trajectory
+      Strike Team levers moved below chart on Simulator tab
+      Combined Model Comparison moved to top of Cross-Validation tab
+
+    v11May 11, 2026
+
+      Ben Abbott education interface added as Tab 1 (Overview) with two levers: Conservation and Augmentation
+      Full Strike Team simulator moved to Tab 2
+      PDO lag corrections applied to climate forcing panel
+      Reframed hypotheses H1–H4 with statistical validation results added to Cross-Validation tab
+      Version History tab added
+
+    v10May 2026
+
+      ENSO × PDO × AR interaction framework added to Simulator tab
+      Statistical validation panel (H1–H4) added to Cross-Validation tab
+      Lag-corrected stochastic fan implemented in trajectory chart
+      Tarboton vs. RC Circuit overlay added to Cross-Validation
+
+    v9 and earlier2025–2026
+
+      Initial RC circuit model implementation with 9.3-yr time constant
+      Seven Strike Team policy levers with range sliders
+      Water Budget tab with historical inflow/evaporation chart
+      Basic elevation trajectory chart with observed data overlay
+      Light/dark mode, Nexus design system, responsive layout

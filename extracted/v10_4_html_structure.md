@@ -1,0 +1,261 @@
+# HTML Structure: GSL-Elevation-Simulator-v10.4.html
+
+## Tabs
+- 🎛️ Simulator `switchTab('sim')`
+- 🔬 Damped Oscillator `switchTab('dosc')`
+- 📖 How It Works `switchTab('how')`
+- ✅ Cross-Validation `switchTab('xval')`
+- 📐 USGS Bathymetry `switchTab('bathy')`
+- 📄 RC Circuit White Paper `switchTab('wp')`
+- 📚 Glossary `switchTab('glossary')`
+- 📊 Data Explorer `switchTab('data')`
+
+## Panels And Headings
+## tab-sim
+- Strike Team Policy Levers
+- Climate Scenario (Background)
+- 🌡️ Climate Monitor (Evaporation Pressure)
+- GSL Elevation 1977–2034 (NGVD29)
+- 📊 Combined Model Comparison (2025–2034)
+- 🔌 PDO-Coherent Forecast (RC Circuit Model)
+- 🎲 Tarboton Stochastic Envelope (k-NN Resampling)
+- 📡 Live GSL Elevation
+- Total Lever Inflow
+- Projected 2034 Elev.
+- Impact Summary
+- References — Simulator
+
+## tab-dosc
+- Damped Oscillator Signature in GSL Volume
+- Modern Era Detail (1980–2035) — Observed + RC Model Forecast (updated from simulator policy levers)
+- Statistical Foundation: PDO–GSL Teleconnection
+- Cross-Correlation Summary
+- Why 8 Years?
+- Current Pacific Conditions
+- ⏰ 8-Year Foresight Window
+- References — Damped Oscillator
+
+## tab-how
+- How the Great Salt Lake Simulator Works
+- Full Record (1930–2025) — Modern Damping Behavior Highlighted
+- ⚠️ Why Forecasting Matters
+- Climate Framing: The Pacific-Basin Multi-Scale Dynamics
+- The PDO as an Integrating Indicator
+- 🔌 The RC Circuit Analogue
+- 📊 Quasi-Periodic Oscillation Forecasting
+- How the Baseline Is Computed
+- References — How It Works
+
+## tab-xval
+- Cross-Validation: Annual Great Salt Lake Water Budget (kAf)
+- Three-Way ΔV Cross-Validation (1930–2025)
+- Correlation Statistics
+- Model Comparison: Two-Model Trajectory (2025–2034)
+- 2034 Performance Curve: Conservation Effects (Augmentation) on GSL Elevation (NGVD29)
+- References — Cross-Validation
+
+## tab-bathy
+- USGS Bathymetry: Elevation → Area → Volume
+- ⚠ Datum Note: NGVD29 vs NAVD88
+- Elevation Lookup (Dual Datum Display)
+- Surface Area
+- Volume
+- Key Thresholds (Both Datums)
+- NGVD29 Bathymetry Nodes (Piecewise Model)
+- References — Bathymetry
+
+## tab-wp
+- 📄 RC Circuit White Paper
+- 📥 Download Full White Paper (PDF)
+- Great Salt Lake Water Level Forecasting via RC Circuit Analogy
+- 1. Introduction
+- 1.2 Climate Framing: The Pacific-Basin Multi-Scale Dynamics
+- 2. RC Circuit Model Framework
+- 3. Phase Lag Calculation
+- 7. ENSO Periodicity Coupling (New in v7.6.1)
+- 8. Historical Validation
+- 11. Self-Criticism
+- References — White Paper
+
+## tab-glossary
+- 📚 Glossary of Terms
+- Units & Measurements
+- Climate & Teleconnection
+- Statistical Terms
+- Model & Engineering
+- Organizations & Programs
+
+## tab-data
+- 📊 Data Explorer
+
+## Inputs
+- id=agSlider, type=range, min=0, max=180, step=10, value=0, oninput=runSim()
+- id=miSlider, type=range, min=0, max=100, step=5, value=0, oninput=runSim()
+- id=phSlider, type=range, min=0, max=50, step=5, value=0, oninput=runSim()
+- id=nfSlider, type=range, min=0, max=50, step=5, value=0, oninput=runSim()
+- id=mnSlider, type=range, min=0, max=150, step=10, value=0, oninput=runSim()
+- id=rsSlider, type=range, min=0, max=180, step=10, value=0, oninput=runSim()
+- id=auSlider, type=range, min=0, max=1500, step=50, value=0, oninput=runSim()
+- id=climateToggle, type=checkbox, onchange=toggleClimateAdj()
+- id=pdoSlider, type=range, min=-3, max=3, step=0.5, value=-2.5, oninput=runSim()
+- id=ensoSlider, type=range, min=-2, max=2, step=0.5, value=0, oninput=runSim()
+- id=togRC, type=checkbox, onchange=updateCombinedChart()
+- id=togTarbMean, type=checkbox, onchange=updateCombinedChart()
+- id=togTarbP5P95, type=checkbox, onchange=updateCombinedChart()
+- id=togTarbP25P75, type=checkbox, onchange=updateCombinedChart()
+- id=togXvalGSLST, type=checkbox, onchange=updateXvalChart()
+- id=togXvalUSGS, type=checkbox, onchange=updateXvalChart()
+- id=togXvalTarb, type=checkbox, onchange=updateXvalChart()
+- id=bathSlider, type=range, min=4170, max=4212, step=0.1, value=4198, oninput=updateBath()
+
+## JavaScript Functions
+- `areaFromElev`
+- `capPerFt`
+- `downloadCSV`
+- `elevFromVol`
+- `fetchClimateData`
+- `fetchUSGS`
+- `getForecastDV`
+- `getTarbBands`
+- `getTarbMean`
+- `initDoscChart2`
+- `initHowDoscChart`
+- `initPerfChart`
+- `initScenarioChart`
+- `initSimChart`
+- `initXvalChart`
+- `lepYield`
+- `loadDataTable`
+- `printReport`
+- `resetSim`
+- `runODE`
+- `runSim`
+- `switchTab`
+- `toggleClimateAdj`
+- `updateBath`
+- `updateCombinedChart`
+- `updateDoscForecast`
+- `updateXvalChart`
+- `volFromElev`
+
+## Top-Level Constants
+- `BASELINE`
+- `BASE_AREA`
+- `BASE_LEP`
+- `COMP_DATA`
+- `DANGER`
+- `FCST_CI`
+- `FCST_YEARS`
+- `FULL_DV`
+- `FULL_ELEV`
+- `FULL_PDO`
+- `FULL_VOL`
+- `FULL_YEARS`
+- `GSLST_IE`
+- `GSLST_YEARS`
+- `HEALTHY`
+- `HIST_CI`
+- `HIST_YEARS`
+- `MODEL_1977`
+- `MONTHLY_ET0_NORMAL`
+- `OBS_1977`
+- `PERF_CURVE`
+- `TARB_250_MEAN`
+- `TARB_800_MEAN`
+- `TARB_800_Q05`
+- `TARB_800_Q25`
+- `TARB_800_Q75`
+- `TARB_800_Q95`
+- `TARB_BASE_MEAN`
+- `TARB_BASE_Q05`
+- `TARB_BASE_Q25`
+- `TARB_BASE_Q75`
+- `TARB_BASE_Q95`
+- `USGS_BUD`
+- `USGS_YEARS`
+- `a`
+- `allFcst`
+- `allFit`
+- `allObs`
+- `allYears`
+- `allYrsDosc`
+- `annot2`
+- `archiveData`
+- `archiveDates`
+- `archiveRes`
+- `archiveUrl`
+- `augThreshold`
+- `augWarn`
+- `badge`
+- `blob`
+- `btns`
+- `chart`
+- `colors`
+- `conePopup`
+- `container`
+- `ctx`
+- `ctx1`
+- `ctx2`
+- `currentData`
+- `currentRes`
+- `currentUrl`
+- `d`
+- `danger`
+- `dangerPopup`
+- `dayCount`
+- `ds`
+- `dt`
+- `dv1`
+- `dv2`
+- `dvArr`
+- `dvData`
+- `e`
+- `effectiveCap`
+- `enso`
+- `ensoNames`
+- `et0Daily`
+- `evapLabel`
+- `evapPct`
+- `evapSign`
+- `extraDV`
+- `fL`
+- `fLv`
+- `fU`
+- `fUv`
+- `fcstDV`
+- `fcstDVext`
+- `fcstDVnegPadded`
+- `fcstDVpadded`
+- `fcstDVposPadded`
+- `fcstYrs`
+- `fi`
+- `finalArea`
+- `finalElev`
+- `finalLEP`
+- `forecast`
+- `gIdx`
+- `gslstData`
+- `hL`
+- `hLen`
+- `hLen2`
+- `hU`
+- `i`
+- `ids`
+- `isLine`
+- `keys`
+- `label`
+- `lakeImpactKaf`
+- `lakeSign`
+- `last`
+- `lepDeltaFinal`
+- `lepPct`
+- `leverImpact`
+- `leverMaxWarnings`
+- `m`
+- `maxAugCap`
+- `monitor`
+- `names`
+- `negEnv1`
+- `negEnv2`
+- `now`
+- `obsDvNeg`

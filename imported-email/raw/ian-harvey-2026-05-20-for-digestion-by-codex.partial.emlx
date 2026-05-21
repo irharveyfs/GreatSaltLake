@@ -1,0 +1,1164 @@
+72000     
+Return-path: <irharveyfs@gmail.com>
+Original-recipient: rfc822;ntharvey@icloud.com
+Received: from p00-icloudmta-smtpin-us-east-1a-10-percent-1 by p114-mailgateway-smtp-cd6946f45-t84k7 (mailgateway 2620B256)
+	with SMTP id 1736cafd-dc56-43b8-be01-03b9019e4673 
+	for <ntharvey@icloud.com>; Thu, 21 May 2026 04:53:31 GMT
+X-ICLOUD-MAIL-BWL: 1
+X-Apple-MoveToFolder: INBOX 
+X-Apple-Action: WL/INBOX
+X-Apple-UUID: 1736cafd-dc56-43b8-be01-03b9019e4673
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+	by p00-icloudmta-smtpin-us-east-1a-10-percent-1 (Postfix) with ESMTPS id E03E2C000AF
+	for <ntharvey@icloud.com>; Thu, 21 May 2026 04:53:21 +0000 (UTC)
+X-ICL-Info: GAtbRVYDBVFFSlVHSwQEUVUKE0oWX1gHVQoPB0UHAkxES1NZQAIYU0JARhIcDV8QHRgUAR1JUBE1HgsWEVwYARoURhEcDVEPFBAKWRtfW0IHGlsZDFhXEAMcHzcRU1oNAB1IFBddFgoQFQlKFVFfDlgdH0ZVVgdVTFcBGBdXWgdbGgkaWEBCEEgUBx4UHVIbRFQARk8JGAUaFgEbHR5VDRhZAhNFV1sDHBVIFBddFg8cHVtLQAYOUk09VjVVCQ5bNFRSRzoGGyMxTFNaPnMGUkA/UzQ9AHQjNR4LFhFcGAEaFFg=
+X-ICL-Score: 2.33303303423
+Authentication-Results: bimi.icloud.com; bimi=skipped reason="insufficient dmarc"
+X-ARC-Info: policy=fail; arc=none; r1=-20; r2=0
+Authentication-Results: arc.icloud.com; arc=none
+Authentication-Results: dmarc.icloud.com; dmarc=pass header.from=gmail.com
+X-DMARC-Policy: v=DMARC1; p=none; sp=quarantine; rua=mailto:mailauth-reports@google.com
+X-DMARC-Info: pass=pass; dmarc-policy=none; s=r1; d=r1; pdomain=gmail.com
+Authentication-Results: dkim-verifier.icloud.com; dkim=pass header.d=gmail.com header.i=@gmail.com header.b=ParAt9fB
+Received-SPF: pass (spf.icloud.com: domain of irharveyfs@gmail.com designates 74.125.82.179 as permitted sender) receiver=spf.icloud.com; client-ip=74.125.82.179; helo=mail-dy1-f179.google.com; envelope-from=irharveyfs@gmail.com
+Authentication-Results: spf.icloud.com; spf=pass (spf.icloud.com: domain of irharveyfs@gmail.com designates 74.125.82.179 as permitted sender) smtp.mailfrom=irharveyfs@gmail.com
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-303f2fb7225so3928693eec.1
+        for <ntharvey@icloud.com>; Wed, 20 May 2026 21:53:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1779339201; x=1779944001; darn=icloud.com;
+        h=to:date:message-id:subject:mime-version:from:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=zVebSaVEja5mIMf9xF/svwvlD9J3fMuLo5g5Tm9J028=;
+        b=ParAt9fBxxZ6uGxVroVJAdyGVmJzCoYon4Y4ElAyLt1DUj2RYbJKy7kH7IL+h8rccC
+         yMj42o1P6BYVLBn5HJR7sQNpm/xTta2QtGsfJcmERKLbpRxcRcix/yzFLhMHQ2g0R5QT
+         776WG8PYorMsaYnisZEwNi1TBCAsDWA1jS5/lrecnQI8j4fVfpn7eTk1gLasDrp9A19f
+         3d62asauao+R98BJxv1xKh3VU1apvFanYi36VcH1MxoUZ8n5B8OY//mGwzQBSrDcUJae
+         bF8YHt1DhvHmIGBDxNMjqk8LWGKwVLxhqtpmloamzJ32WHA1YIknNX+WRFwm3B8RXuqO
+         HSwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779339201; x=1779944001;
+        h=to:date:message-id:subject:mime-version:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=zVebSaVEja5mIMf9xF/svwvlD9J3fMuLo5g5Tm9J028=;
+        b=p17tLBy3SbDd1HIoq1Z1QcqqQtaQN6l5TCaFPlHsIcxStaiBEbQ7hmsGGwJgb0K89l
+         LJxQvl+B9fuiR0Wk+DbcDXsoqQ+XLTFimHO98DkCRHxfXwDwWRYitwRTEcFfLD6QTH+v
+         Y8XzrduVepjylTP9W6UKA0Xp+1s0AQnsqTtDravL6SBH0/C4eTfsIdYuvQD8GC8byeXC
+         X4y02a7XYeI3JOJEK01KCaKCl4mtFW8yICiVoaEmFVuyCo1KSwUsd1MxT0jLE3Im0HDH
+         LkMNciuZI7XrV8QhET3vuM/54rRqD76BuxzsU6hZ7CP7H07mUL5KG1ZZEsry+MOPrpbo
+         F00Q==
+X-Gm-Message-State: AOJu0YwLX/A/KzwpZySWGp5W3IuhYCSzGkJISg/ZUqBSb81O0A2lmptI
+	ECmoOYZ1zULqGLyVzXILGffWPRBRN9W11DWDUr/NtUurFvML+mP3/KCh7LiKmw==
+X-Gm-Gg: Acq92OFMYQm/FvlNA7B8s5kl33m7Qkai9A6VTtpAV/kBK/K7iCDKACAj51VGh+cXUSb
+	m/GszCESsf+Aj5ryCaUvEsYMLgWHyHvOq4+1uyQ49puWfO+468/pUKLY+8Mg64oLevUiMSJipDb
+	70YexytOQdyO055VdOCI8L2lMofQQtsPThDGrmJtLW6qWPbM86qCqKWi/3AwgIG43Svs7kMfWEe
+	IQ9ni2gJPeDKcd8uPR9KHVC5zruPCl2DggeUbkt2Sm/ptI2DVTsWbLtqwGpybzfMuX5r4YnDIqW
+	PkZIDxXCJE1btNMSZOYjJOg0iGWQe0E+gn/Jx4ilQ5NG/lI5ZLKMRPlAIUly+ZrM2xNlu0i92Q6
+	SWVXgguHAIL+drQduvaRmco3UdhvQXydd2XzSeu15KamLWQ/5gtx6nIsrlRtMOqoufZO6pKWR0F
+	eIHuXhx18lt2dh+QE7P+LdyMN3lLDMZWZOV4ccFDBohg8rHb393g==
+X-Received: by 2002:a05:7300:570f:b0:2cb:4b8f:b2bd with SMTP id 5a478bee46e88-3042f476d80mr776737eec.6.1779339199956;
+        Wed, 20 May 2026 21:53:19 -0700 (PDT)
+Received: from smtpclient.apple ([2601:680:cc82:2180:2d6a:a3ca:794e:77f9])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-134cc33a67csm27538874c88.13.2026.05.20.21.53.18
+        for <ntharvey@icloud.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 20 May 2026 21:53:19 -0700 (PDT)
+From: Ian Harvey <irharveyfs@gmail.com>
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_2495CE5E-76EE-4542-B5EA-AD477AC80728"
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3731.700.6.1.21\))
+Subject: For digestion by CODEX...
+Message-Id: <86808D0B-989A-40B6-AD55-FC005F5CE0BA@gmail.com>
+Date: Wed, 20 May 2026 22:53:07 -0600
+To: Nephi Harvey <ntharvey@icloud.com>
+X-Mailer: Apple Mail (2.3731.700.6.1.21)
+X-MANTSH: 1TFkXGxoaHxEKWUQXYW1leVIcf1puYmURCllNF25PRkNcT1gRCl9ZFxgbHhEKX00
+ XZEVETxEKWUkXGnEaEBp3BhsTHnEbHR8QGncGGBoGGhEKWV4XbGx5EQpDThcZX3JsE3t7ZUBiH
+ WlDEnxCXkYZe2BOQV8eE3hbf2xoRhEKWFwXGQQaBB8SBRsaBBscGAQZGgQYExAbHhofGhEKXlk
+ XQnhueE4RCk1cFxkcHxEKTFoXaGlrTWsRCkxGF29ra2trTWsRCkNaFx0eBBsYHwQSGAQbHRMRC
+ kJeFxsRCkJcFxsRCl5OFxsRCkJLF2NTY2t7E1h+Gl9eEQpCSRdjU2NrexNYfhpfXhEKQkUXbkt
+ sU21teHlDYUERCkJOF2NTY2t7E1h+Gl9eEQpCTBduekZgSVN7TUlFZxEKQmwXbxkFXEJGf2trG
+ hsRCkJAF2xBXmdGQVkaXh0aEQpCWBdgYn9fYRlBUnxuGBEKWlgXGBEKcGgXYHxEWExBUFBTGmY
+ QGRoRCnBsF2MYeEMTeHJlc25vEBkaEQpwTBdpcH57YhxnH1hJcBAZGhEKbX4XGhEKWE0XSxE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIxMDA0NCBTYWx0ZWRfX05qdY1SdsoXU
+ JBWiHM/suDQ6faOA/g1jj680kWuSL4vGXFgwA43q0Kdr+tA7qPBXfd9N0k3FzjKWVmG9yvHYSlQ
+ X+syKvKqkbw7UHSvSLEOiq/m2daHn/F3pexC1W1lS4IbvxqvYVi/7lL6WQVj7gp2TaEdfJm5/eN
+ u+gLK+eL5l/NziTw573t8ivve60TRlQr3bbceSWtlZsbsk7GOIiHx+7Qbnvvf5aOXEOH2IPSoPq
+ l66VpZG0UklKT7ap5S+s0uOC3I3OFmzr08BKzTqakkNQdpGdHad4PG5FcBAiuN9jHL7JfWtsKuZ
+ AWw7EmBEM+lYEqnRu4iDZaJS4INSY+pibnkHG/TBBvHuuxjLQIaMtERuNirqv3YnmYYoO32OJvN
+ cPveOoGiKW9OXGf17vVEKhdBQx4BlHWzzj9Vk02L2K3s80sRNFY=
+X-Proofpoint-ORIG-GUID: 3uXF9QQOjH7Ci8Vhtl3QJdku49RqUFBl
+X-Authority-Info: v=2.4 cv=AuTjHe9P c=1 sm=1 tr=0 ts=6a0e8fc3 cx=c_apl:c_pps
+ a=E+VvaT8Q4yvisMS1c7To1A==:117 a=xqWC_Br6kY4A:10 a=NGcC8JguVDcA:10
+ a=x7bEGLp0ZPQA:10 a=JEwNZW1W_MwA:10 a=95EFz5htlIgA:10
+ a=g37reLag4qYP0e6io6gA:9 a=QEXdDO2ut3YA:10 a=eASQeAOQK2Xo95QgUyIA:9
+ a=_W_S_7VecoQA:10 a=kCLTV3WxUFDmyokh_zcA:9 a=IKIoO-ieCDEA:10
+ a=CyDbrGLRJ-AA:10 a=tclcd6dtLQvEqt9_mmAA:9 a=CjuIK1q_8ugA:10
+ a=5Wb0rqsy7NrenGMstnwA:9 a=lmMI4vMy7R212MPT:21 a=L03L2QfmqWoA:10
+ a=1WNtSb5ECZgA:10 a=_C6zaqPeZVUA:10 a=O8hF6Hzn-FEA:10
+ a=eBH0QujikWkzd9RVQ5wA:9 a=4mg8FpsUnhVvayXX:21 a=pOttmSAIt3nSbokeZ8sA:9
+ a=0CS8HDSE8iLs9D8HDrUA:9 a=2lwfDoB2ehDVdodv:21 a=HXjIzolwW10A:10
+ a=T6a71-JsGAwA:10 a=lXthP98mIPudrY21:21
+X-Proofpoint-GUID: 3uXF9QQOjH7Ci8Vhtl3QJdku49RqUFBl
+X-JNJ: AAAAAAABSqLOlRK3wS5fT/06N8HQR0Oe5Kmm8wJU1Bcw11lZuLERraEJ4Qzbey3UDHyA4TZwZ4HdbS8oCic2OT4QlK7DLTLJjlP3qeCfWXoMGUibKh0I/7WoEA4amHw9i5XJR7bXxCQuUtaEsB70dvp2Lqp2Z5XohktDIPhUzxO/0FLwgxCJOduI0yiSGY8tg7umjIOhjLvyr9dUBA5jGk+hPakQhLfS73pBWvbo98gqhhYlMMf8Sd+9jOmNEq8gkAEHcjjH61xLaI7QhZYggjzhdpe5i2J9Ym4RUAIv7k7brMgkW25sSfldL5Djw69c7DSFPOG/VlScukuDehoS0fOT4dOhcp4r6AbEKmkfWYcwwYQ4bFXt7AIiEV7AuK84kkozS5igOiwl4HPoZXpioL7GRRS4XF9P4934IqohXjot6Xm+5qv8sQZF8o0zw8qrunoNEq0GeI5h66TAk1K8Kot84yYV1/j4fNA9cJedC9gFpCQPDMcxBar/zg3iGcQN5zLg/OZ+zqN/B/wdasroaYqGMQI+B9ILQnoWAEg93USoitmqyGq5GBIdDgOdU5q8WJ8/JkiSJUGXGUh8u7a6fw3TJXiJ/b3O4969p3QeyvZDHrzkBHUFWQO4r8KKFQ9YKdvCf+XhhTiaPwk0NA+I0E6dI0dbjmEQheAi4fWoL7v5EotNlVhATAXIN1wAINFJjU3JGnpbsSUy2Q3Pghk/z6Gs45Jwlt3xLz8VVcvGpFQzAHRr0GiEFdxPy2SMFk8QvzFkx3wLqxGXhH18NUqElDmQTaU6t1U4gZcLWcyo1kiylsl//N403WDbXzysr1F2nQ27xGPvog6gi4HieJxcq0Ri4gb5hsMgOUiyfyysb52AwZaX9zUvGQo3oY2Np5+DcuptCfEwFuHLnw==
+
+
+--Apple-Mail=_2495CE5E-76EE-4542-B5EA-AD477AC80728
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
+
+Hi Nephi,
+
+Please use the following prompt alongside these attached files, and see =
+what CODEX comes up with.  Thanks!
+
+=E2=80=94b
+=EF=BF=BC
+
+=EF=BF=BC=EF=BF=BC=EF=BF=BC
+Statistic	Value	Domain	Variable measured	Clock starts at	=
+Includes hydro routing?
+Physical lag chain	3 + 3 =3D 6	Physical/mechanistic	Precip =
+=E2=86=92 GSL	Watershed gauge	Yes (IS the routing)
+Spectral coherence phase	7.2 =C2=B1 1.5 yr	Frequency domain	=
+PDO =E2=86=92 GSL (bandpassed)	Pacific SST	Yes (full chain)
+Cross-correlation peak	7 yr	Time domain	PDO =E2=86=92 GSL dV/dt	=
+Pacific SST	Partial (derivative)
+FFT dominant period	8 yr	Frequency domain	Resonant =
+oscillation of GSL dV/dt	Not a lag (period)	N/A
+Gillies Eq.1 dominant term	8 yr	Regression	PDO =E2=86=92 =
+GSL elevation tendency	Pacific SST	Yes (full chain)
+=EF=BF=BC=EF=BF=BC=EF=BF=BC=EF=BF=BC=EF=BF=BC=EF=BF=BC
+
+I would like to create a v14 elevation simulator based on the gold =
+standard v.10.4, with some upgrades conceptually found in attached v12.  =
+But v.12 is quite buggy and I mostly don=E2=80=99t like it.   Codex, =
+your job, if you choose to accept it, is to take what is good from =
+somebody else=E2=80=99s code in v10.4, leave alone the tabs that are =
+unaffected by the integration of the new PDO/ENSO connections and the =
+policy levers, and upgrade it as described below. =20
+
+This will require you in the planning phase to deeply analyze and =
+critique each of the technical assertions embedded mathematically in the =
+code, described in the text and displayed graphically.  (and check for =
+self consistency) If satisfied, proceed with planning the next version. =
+If concerned, itemize each inconsistency or falsehood and let=E2=80=99s =
+talk.
+
+Note that I am fond of the current styling of v10.4, its presentation =
+and its graphics, especially how it compares the Tarboton stochastic =
+analysis to the determinative prediction. =20
+
+The goal is that we want to create a simulator that is largely the same =
+as the vetted v10.4, but that accounts for the new mathematical =
+modifications as described in the attached papers.  We=E2=80=99ll be =
+more confident if it is successful if we see a lake elevation bump in =
+2029-2030.  Note that the attached v.12 failed in this regard.
+
+A couple of other changes we are planning in this version, that were at =
+least partially successful in the attached v12 (please review all =
+materials, come back with a plan and any clarifying questions):
+
+(1) create a simplified first tab without a lot of technical clutter, =
+but that has just two levers: conservation and augmentation. This will =
+be used for education purposes.  It should span the same time period as =
+the main simulator tab, and show the same uncertainty envelope around =
+the forecast.
+2) Then the current simulator tab can move to the second tab position =
+with the following changes: Move the Combined model comparison with its =
+blue and red explanation boxes to the top of the cross-validation tab.=20=
+
+3) Place the strike team policy levers below the graph on the simulator =
+tab and for each lever we need to enable a year-by-year accounting =
+methodology, because there is no way any particular lever can deliver a =
+consistent amount of water as the source constantly changes. e.g., ag =
+optimization and leasing will only work following good water years. Like =
+this year, the streams are dry but reservoirs still have banked water. =
+So water rights may be diverted from storage systems to GSL. But if the =
+next year is also dry, that strategy is screwed. Likewise, Newfoundland =
+has water this year, but if we bring it back to the lake, then that is a =
+one-time benefit. Mineral extraction at USMag has ceased. so we are not =
+drawing that water out. But accounting wise, I guess we get to count it =
+every year. Similarly phragmites...=20
+
+
+This turn,=20
+(1) Please read and modify the RC white paper embedded in v.10.4 and =
+update according to the addendum and documents attached here.  This new =
+document will be needed to support the v14 upcoming, in a similar =
+embedded fashion.   Compare your version to the one embedded in v12, and =
+let=E2=80=99s discuss any major differences.
+
+(2) create a plan for implementing the new v14 simulator
+
+=46rom v. 10.4 Please keep the  following tabs intact: Damped =
+Oscillator, how it works, USGS bathymetry, Glossary, Data explorer=20
+
+=46rom V12, keep the =E2=80=9Cwater budget=E2=80=9D tab, the model and =
+methods, and the version history tab, noting that v.10 was in March, =
+2026. v12 and v13 were unsuccessful attempts to implement the above =
+changes.  On v.14, please add an appropriate citation for the efforts by =
+Codex, augmenting what has previously been done in Perplexity.
+
+(3) please note that the RC white paper should just have my authorship =
+without reference to anyone else yet. I still need to separately invite =
+their participation.=20
+
+Attached find some graphs that belong embedded in the white paper, which =
+in turn, should be embedded in the clickable HTML elevation simulator =
+app.  If, in your questioning and planning phase, you find they are =
+better suited embedded into a different tab, I will certainly entertain =
+your suggestion.  I=E2=80=99ll also entertain your recommendation on =
+re-ordering the tabs for better logical flow.
+
+Below find some random notes from the failed v12-13 threads that may or =
+may not be helpful as you plan your approach.  They should be used in =
+guiding, not determining your direction and outcomes, But they may be =
+helpful in framing questions that I can answer in the first turn.
+
+On the Overview tab, I change the sliders and nothing changes on the =
+graph.  does it work?  I would also like the graph to begin at 1977 for =
+context.  The intent was that this should be a simplified version of the =
+main simulator  On the simulator tab I like the graphical presentation =
+of v10.4, particularly becasue of the uncertainty cone surrounding the =
+projection.  On V12, again, I don=E2=80=99t see that any of the policy =
+levers actually have an effect on the projection, either from the slider =
+or from the annual accounting tabs.  Please verify that these are =
+working, and if they are, please implement the v12 annual accounting =
+(and the new PDO-ENSO correlation) into the v10.4 visualization. On the =
+Cross-validation tab, this tab name applies to the V10.4, which we will =
+keep.  The v12 cross validation tab will be retained in v14 but renamed =
+as =E2=80=9CTesting Hypotheses=E2=80=9D.  NOTE here that the table in =
+this tab indicates 61% skill for forecasting in the five year horizon.  =
+We want to forecast out to the 2036 horizon and let the uncertainty cone =
+expand accordingly.=20
+
+
+Some clarifications: the purpose of the Overview tab is to provide a =
+very simple entry point, useful for educational purposes and =
+implementing the RC enabled forecasting but without the other =
+distractions. Q2: yes, 2034 is a milestone marker. The 2026 PDO/ENSO =
+effects are expected to be lagged to 2030-31, correct? yes, note the =
+skill % drop at 2036. Q3: So the annual accounting functions only apply =
+in the "simulator" tab. Please verify that any changes to any of the =
+years would be reflected both in downstream effects from the same lever, =
+as well as manifest in the total trend (yes, "drive" per you 3(c) =
+question). I expect that one-time changes (reservoir release etc) will =
+not make a huge difference, but phragmites and mineral changes will =
+reflect every year. Q4: I think the PDO/ENSO should be fixed according =
+to our best understanding of the current state (or the combined ENSO now =
+with the state of PDO 3+3 years ago. We already look at the weather, so =
+we should do a real-time check of the PDO /ENSO. Now, what may be =
+valuable would be to change these in the timeframe beyond the known =
+(spring 2027 for ENSO, post 3+3 for PDO?) that would enable some =
+scenario based forecasting beyond the known window. Can you come up with =
+a way to do that? Q5: Are you saying that v10.4 thought the then-current =
+elevation was 4192? If so, then yes, definitely update this. Q6: on =
+versioning: yes v10 in March. Skip v.12 documentation and incorporate =
+the PDO/ENSO integration into V13.=
+
+--Apple-Mail=_2495CE5E-76EE-4542-B5EA-AD477AC80728
+Content-Type: multipart/mixed;
+	boundary="Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397"
+
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=utf-8
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; =
+charset=3Dutf-8"></head><body style=3D"overflow-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;">Hi =
+Nephi,<div><br></div><div>Please use the following prompt alongside =
+these attached files, and see what CODEX comes up with. =
+&nbsp;Thanks!</div><div><br></div><div>=E2=80=94b</div><div></div></body><=
+/html>=
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename*0*=utf-8''GSL%20RC%20Model%20%E2%80%94%20Lag%2DCorrected%20Statistical%20Analysis%20%26%20PDO%C3%97ENSO%20;
+	filename*1*=Alignment%20Report.docx
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document;
+	name*0*=utf-8''GSL%20RC%20Model%20%E2%80%94%20Lag%2DCorrected%20Statistical%20Analysis%20%26%20PDO%C3%97ENSO%20;
+	name*1*=Alignment%20Report.docx;
+	x-unix-mode=0644
+X-Apple-Content-Length: 173271
+
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><body style="overflow-wrap: break-word; -webkit-nbsp-mode: space; line-break: after-white-space;"><head><meta http-equiv="content-type" content="text/html; charset=us-ascii"></head><div></div><div><br></div><div></div></body></html>
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename=GSL-Elevation-Simulator-v10.4.html
+Content-Type: text/html;
+	name=GSL-Elevation-Simulator-v10.4.html;
+	x-unix-mode=0644
+X-Apple-Content-Length: 135738
+
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><body style="overflow-wrap: break-word; -webkit-nbsp-mode: space; line-break: after-white-space;"><head><meta http-equiv="content-type" content="text/html; charset=us-ascii"></head><div></div></body></html>
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename=gsl-simulator-v12.html
+Content-Type: text/html;
+	name=gsl-simulator-v12.html;
+	x-unix-mode=0644
+X-Apple-Content-Length: 78494
+
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><body style="overflow-wrap: break-word; -webkit-nbsp-mode: space; line-break: after-white-space;"><head><meta http-equiv="content-type" content="text/html; charset=us-ascii"></head><div></div></body></html>
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename*0="PDO Phase Modulation of ENSO Teleconnections and Atmospheric Riv";
+	filename*1="er Delivery to the Great Salt Lake Watershed  A Multi-Scale RC C";
+	filename*2="ircuit Framework with Lagged Statistical Validation (1).docx"
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document;
+	name*0="PDO Phase Modulation of ENSO Teleconnections and Atmospheric Riv";
+	name*1="er Delivery to the Great Salt Lake Watershed  A Multi-Scale RC C";
+	name*2="ircuit Framework with Lagged Statistical Validation (1).docx";
+	x-unix-mode=0644
+X-Apple-Content-Length: 244486
+
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=utf-8
+
+<html><body style=3D"overflow-wrap: break-word; -webkit-nbsp-mode: =
+space; line-break: after-white-space;"><head><meta =
+http-equiv=3D"content-type" content=3D"text/html; =
+charset=3Dutf-8"></head><div></div><table =
+[&amp;_tr:last-child_td]:border-b-0=3D"" my-0=3D"" w-full=3D"" =
+table-auto=3D"" border-separate=3D"" border-spacing-0=3D"" text-sm=3D"" =
+font-sans=3D"" rounded-lg=3D"" =
+[&amp;_tr:last-child_td:first-child]:rounded-bl-lg=3D"" =
+[&amp;_tr:last-child_td:last-child]:rounded-br-lg"=3D"" style=3D"color: =
+rgb(0, 0, 0); font-variant-caps: normal; border-collapse: collapse; =
+width: 784px; font-family: Arial, sans-serif;"><thead><tr><th =
+scope=3D"col" class=3D"border-subtlest p-sm min-w-[48px] break-normal =
+border-b text-left align-bottom border-r last:border-r-0 font-bold =
+bg-subtle first:border-radius-tl-lg last:border-radius-tr-lg" =
+style=3D"background-color: rgb(242, 242, 242); border: 1px solid =
+rgb(221, 221, 221); padding: 8px; text-align: left;">Statistic</th><th =
+scope=3D"col" class=3D"border-subtlest p-sm min-w-[48px] break-normal =
+border-b text-left align-bottom border-r last:border-r-0 font-bold =
+bg-subtle first:border-radius-tl-lg last:border-radius-tr-lg" =
+style=3D"background-color: rgb(242, 242, 242); border: 1px solid =
+rgb(221, 221, 221); padding: 8px; text-align: left;">Value</th><th =
+scope=3D"col" class=3D"border-subtlest p-sm min-w-[48px] break-normal =
+border-b text-left align-bottom border-r last:border-r-0 font-bold =
+bg-subtle first:border-radius-tl-lg last:border-radius-tr-lg" =
+style=3D"background-color: rgb(242, 242, 242); border: 1px solid =
+rgb(221, 221, 221); padding: 8px; text-align: left;">Domain</th><th =
+scope=3D"col" class=3D"border-subtlest p-sm min-w-[48px] break-normal =
+border-b text-left align-bottom border-r last:border-r-0 font-bold =
+bg-subtle first:border-radius-tl-lg last:border-radius-tr-lg" =
+style=3D"background-color: rgb(242, 242, 242); border: 1px solid =
+rgb(221, 221, 221); padding: 8px; text-align: left;">Variable =
+measured</th><th scope=3D"col" class=3D"border-subtlest p-sm =
+min-w-[48px] break-normal border-b text-left align-bottom border-r =
+last:border-r-0 font-bold bg-subtle first:border-radius-tl-lg =
+last:border-radius-tr-lg" style=3D"background-color: rgb(242, 242, 242); =
+border: 1px solid rgb(221, 221, 221); padding: 8px; text-align: =
+left;">Clock starts at</th><th scope=3D"col" class=3D"border-subtlest =
+p-sm min-w-[48px] break-normal border-b text-left align-bottom border-r =
+last:border-r-0 font-bold bg-subtle first:border-radius-tl-lg =
+last:border-radius-tr-lg" style=3D"background-color: rgb(242, 242, 242); =
+border: 1px solid rgb(221, 221, 221); padding: 8px; text-align: =
+left;">Includes hydro routing?</th></tr></thead><tbody><tr><td =
+class=3D"border-subtlest px-sm min-w-[48px] break-normal border-b =
+border-r last:border-r-0" style=3D"border: 1px solid rgb(221, 221, 221); =
+padding: 8px;">Physical lag chain</td><td class=3D"border-subtlest px-sm =
+min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;">3 + 3 =
+=3D&nbsp;<strong>6</strong></td><td class=3D"border-subtlest px-sm =
+min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: =
+8px;">Physical/mechanistic</td><td class=3D"border-subtlest px-sm =
+min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;">Precip =E2=86=
+=92 GSL</td><td class=3D"border-subtlest px-sm min-w-[48px] break-normal =
+border-b border-r last:border-r-0" style=3D"border: 1px solid rgb(221, =
+221, 221); padding: 8px;">Watershed gauge</td><td class=3D"border-subtlest=
+ px-sm min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;">Yes (IS =
+the routing)</td></tr><tr><td class=3D"border-subtlest px-sm =
+min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;">Spectral =
+coherence phase</td><td class=3D"border-subtlest px-sm min-w-[48px] =
+break-normal border-b border-r last:border-r-0" style=3D"border: 1px =
+solid rgb(221, 221, 221); padding: 8px;"><strong>7.2 =C2=B1 1.5 =
+yr</strong></td><td class=3D"border-subtlest px-sm min-w-[48px] =
+break-normal border-b border-r last:border-r-0" style=3D"border: 1px =
+solid rgb(221, 221, 221); padding: 8px;">Frequency domain</td><td =
+class=3D"border-subtlest px-sm min-w-[48px] break-normal border-b =
+border-r last:border-r-0" style=3D"border: 1px solid rgb(221, 221, 221); =
+padding: 8px;">PDO =E2=86=92 GSL (bandpassed)</td><td =
+class=3D"border-subtlest px-sm min-w-[48px] break-normal border-b =
+border-r last:border-r-0" style=3D"border: 1px solid rgb(221, 221, 221); =
+padding: 8px;">Pacific SST</td><td class=3D"border-subtlest px-sm =
+min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;">Yes (full =
+chain)</td></tr><tr><td class=3D"border-subtlest px-sm min-w-[48px] =
+break-normal border-b border-r last:border-r-0" style=3D"border: 1px =
+solid rgb(221, 221, 221); padding: 8px;">Cross-correlation peak</td><td =
+class=3D"border-subtlest px-sm min-w-[48px] break-normal border-b =
+border-r last:border-r-0" style=3D"border: 1px solid rgb(221, 221, 221); =
+padding: 8px;"><strong>7 yr</strong></td><td class=3D"border-subtlest =
+px-sm min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;">Time =
+domain</td><td class=3D"border-subtlest px-sm min-w-[48px] break-normal =
+border-b border-r last:border-r-0" style=3D"border: 1px solid rgb(221, =
+221, 221); padding: 8px;">PDO =E2=86=92 GSL dV/dt</td><td =
+class=3D"border-subtlest px-sm min-w-[48px] break-normal border-b =
+border-r last:border-r-0" style=3D"border: 1px solid rgb(221, 221, 221); =
+padding: 8px;">Pacific SST</td><td class=3D"border-subtlest px-sm =
+min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;">Partial =
+(derivative)</td></tr><tr><td class=3D"border-subtlest px-sm =
+min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;">FFT =
+dominant period</td><td class=3D"border-subtlest px-sm min-w-[48px] =
+break-normal border-b border-r last:border-r-0" style=3D"border: 1px =
+solid rgb(221, 221, 221); padding: 8px;"><strong>8 yr</strong></td><td =
+class=3D"border-subtlest px-sm min-w-[48px] break-normal border-b =
+border-r last:border-r-0" style=3D"border: 1px solid rgb(221, 221, 221); =
+padding: 8px;">Frequency domain</td><td class=3D"border-subtlest px-sm =
+min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;">Resonant =
+oscillation of GSL dV/dt</td><td class=3D"border-subtlest px-sm =
+min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;">Not a lag =
+(period)</td><td class=3D"border-subtlest px-sm min-w-[48px] =
+break-normal border-b border-r last:border-r-0" style=3D"border: 1px =
+solid rgb(221, 221, 221); padding: 8px;">N/A</td></tr><tr><td =
+class=3D"border-subtlest px-sm min-w-[48px] break-normal border-b =
+border-r last:border-r-0" style=3D"border: 1px solid rgb(221, 221, 221); =
+padding: 8px;">Gillies Eq.1 dominant term</td><td class=3D"border-subtlest=
+ px-sm min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;"><strong>8 =
+yr</strong></td><td class=3D"border-subtlest px-sm min-w-[48px] =
+break-normal border-b border-r last:border-r-0" style=3D"border: 1px =
+solid rgb(221, 221, 221); padding: 8px;">Regression</td><td =
+class=3D"border-subtlest px-sm min-w-[48px] break-normal border-b =
+border-r last:border-r-0" style=3D"border: 1px solid rgb(221, 221, 221); =
+padding: 8px;">PDO =E2=86=92 GSL elevation tendency</td><td =
+class=3D"border-subtlest px-sm min-w-[48px] break-normal border-b =
+border-r last:border-r-0" style=3D"border: 1px solid rgb(221, 221, 221); =
+padding: 8px;">Pacific SST</td><td class=3D"border-subtlest px-sm =
+min-w-[48px] break-normal border-b border-r last:border-r-0" =
+style=3D"border: 1px solid rgb(221, 221, 221); padding: 8px;">Yes (full =
+chain)</td></tr></tbody></table><div></div></body></html>=
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+	filename=c249614b.png
+Content-Type: image/png;
+	name=c249614b.png;
+	x-unix-mode=0644
+X-Apple-Content-Length: 434912
+
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><body style="overflow-wrap: break-word; -webkit-nbsp-mode: space; line-break: after-white-space;"><head><meta http-equiv="content-type" content="text/html; charset=us-ascii"></head><div></div></body></html>
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+	filename=25dcca36.png
+Content-Type: image/png;
+	name=25dcca36.png;
+	x-unix-mode=0644
+X-Apple-Content-Length: 504949
+
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><body style="overflow-wrap: break-word; -webkit-nbsp-mode: space; line-break: after-white-space;"><head><meta http-equiv="content-type" content="text/html; charset=us-ascii"></head><div></div></body></html>
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+	filename=cfcf2f02.png
+Content-Type: image/png;
+	name=cfcf2f02.png;
+	x-unix-mode=0644
+X-Apple-Content-Length: 447860
+
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><body style="overflow-wrap: break-word; -webkit-nbsp-mode: space; line-break: after-white-space;"><head><meta http-equiv="content-type" content="text/html; charset=us-ascii"></head><div></div></body></html>
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+	filename=c2b947db.png
+Content-Type: image/png;
+	name=c2b947db.png;
+	x-unix-mode=0644
+X-Apple-Content-Length: 360919
+
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><body style="overflow-wrap: break-word; -webkit-nbsp-mode: space; line-break: after-white-space;"><head><meta http-equiv="content-type" content="text/html; charset=us-ascii"></head><div></div></body></html>
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+	filename=6d0dd7d6.png
+Content-Type: image/png;
+	name=6d0dd7d6.png;
+	x-unix-mode=0644
+X-Apple-Content-Length: 431982
+
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><body style="overflow-wrap: break-word; -webkit-nbsp-mode: space; line-break: after-white-space;"><head><meta http-equiv="content-type" content="text/html; charset=us-ascii"></head><div></div></body></html>
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: base64
+Content-Disposition: inline;
+	filename=72d49389.png
+Content-Type: image/png;
+	name=72d49389.png;
+	x-unix-mode=0644
+X-Apple-Content-Length: 451390
+
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=utf-8
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; =
+charset=3Dutf-8"></head><body style=3D"overflow-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: =
+after-white-space;"><div></div><div><br></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">I would like to create a v14 elevation =
+simulator based on the gold standard v.10.4, with some upgrades =
+conceptually found in attached v12.&nbsp; But v.12 is quite buggy and I =
+mostly don=E2=80=99t like it. &nbsp; Codex, your job, if you choose to =
+accept it, is to take what is good from somebody else=E2=80=99s code in =
+v10.4, leave alone the tabs that are unaffected by the integration of =
+the new PDO/ENSO connections and the policy levers, and upgrade it as =
+described below. &nbsp;</span></div><div><span style=3D"font-size: 16px; =
+color: rgb(39, 37, 30); font-family: pplxSans, ui-sans-serif, system-ui, =
+-apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica =
+Neue&quot;, Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, =
+&quot;Yu Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; orphans: =
+2; widows: 2; white-space: pre-line; background-color: rgba(39, 26, 0, =
+0.035); text-decoration-thickness: initial; text-decoration-style: =
+initial; text-decoration-color: initial;"><br></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">This will require you in the planning =
+phase to deeply analyze and critique each of the technical assertions =
+embedded mathematically in the code, described in the text and displayed =
+graphically. &nbsp;(and check for self consistency) If satisfied, =
+proceed with planning the next version. If concerned, itemize each =
+inconsistency or falsehood and let=E2=80=99s =
+talk.</span></div><div><span style=3D"font-size: 16px; color: rgb(39, =
+37, 30); font-family: pplxSans, ui-sans-serif, system-ui, -apple-system, =
+system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, =
+Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu =
+Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; orphans: =
+2; widows: 2; white-space: pre-line; background-color: rgba(39, 26, 0, =
+0.035); text-decoration-thickness: initial; text-decoration-style: =
+initial; text-decoration-color: initial;"><br></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">Note that I am fond of the current =
+styling of v10.4, its presentation and its graphics, especially how it =
+compares the Tarboton stochastic analysis to the determinative =
+prediction. &nbsp;</span></div><div><span style=3D"font-size: 16px; =
+color: rgb(39, 37, 30); font-family: pplxSans, ui-sans-serif, system-ui, =
+-apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica =
+Neue&quot;, Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, =
+&quot;Yu Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; orphans: =
+2; widows: 2; white-space: pre-line; background-color: rgba(39, 26, 0, =
+0.035); text-decoration-thickness: initial; text-decoration-style: =
+initial; text-decoration-color: initial;"><br></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">The goal is that we want to create a =
+simulator that is largely the same as the vetted v10.4, but that =
+accounts for the new mathematical modifications as described in the =
+attached papers. &nbsp;We=E2=80=99ll be more confident if it is =
+successful if we see a lake elevation bump in 2029-2030. &nbsp;Note that =
+the attached v.12 failed in this regard.</span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;"><br></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">A couple of other changes we are =
+planning in this version, that were at least partially successful in the =
+attached v12 (please review all materials, come back with a plan and any =
+clarifying questions):</span></div><div><span style=3D"font-size: 16px; =
+color: rgb(39, 37, 30); font-family: pplxSans, ui-sans-serif, system-ui, =
+-apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica =
+Neue&quot;, Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, =
+&quot;Yu Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; orphans: =
+2; widows: 2; white-space: pre-line; background-color: rgba(39, 26, 0, =
+0.035); text-decoration-thickness: initial; text-decoration-style: =
+initial; text-decoration-color: initial;"><br></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">(1) create a simplified first tab =
+without a lot of technical clutter, but that has just two levers: =
+conservation and augmentation.  This will be used for education =
+purposes. &nbsp;It should span the same time period as the main =
+simulator tab, and show the same uncertainty envelope around the =
+forecast.</span></div><div><span style=3D"font-size: 16px; color: =
+rgb(39, 37, 30); font-family: pplxSans, ui-sans-serif, system-ui, =
+-apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica =
+Neue&quot;, Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, =
+&quot;Yu Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; orphans: =
+2; widows: 2; white-space: pre-line; background-color: rgba(39, 26, 0, =
+0.035); text-decoration-thickness: initial; text-decoration-style: =
+initial; text-decoration-color: initial;">2) Then the current simulator =
+tab can move to the second tab position with the following changes:  =
+Move the Combined model comparison with its blue and red explanation =
+boxes to the top of the cross-validation =
+tab.&nbsp;</span></div><div><span style=3D"font-size: 16px; color: =
+rgb(39, 37, 30); font-family: pplxSans, ui-sans-serif, system-ui, =
+-apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica =
+Neue&quot;, Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, =
+&quot;Yu Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; orphans: =
+2; widows: 2; white-space: pre-line; background-color: rgba(39, 26, 0, =
+0.035); text-decoration-thickness: initial; text-decoration-style: =
+initial; text-decoration-color: initial;">3) Place the strike team =
+policy levers below the graph on the simulator tab and for each lever we =
+need to enable a year-by-year accounting methodology, because there is =
+no way any particular lever can deliver a consistent amount of water as =
+the source constantly changes.  e.g., ag optimization and leasing  will =
+only work following good water years.  Like this year, the streams are =
+dry but reservoirs still have banked water. So water rights may be =
+diverted from storage systems to GSL.  But if the next year is also dry, =
+that strategy is screwed.  Likewise, Newfoundland has water this year, =
+but if we bring it back to the lake, then that is a one-time benefit.  =
+Mineral extraction at USMag has ceased. so we are not drawing that water =
+out.  But accounting wise, I guess we get to count it every year. =
+Similarly phragmites...&nbsp;</span></div><div><br></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;"><br></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">This turn,&nbsp;</span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">(1) Please read and modify the RC white =
+paper embedded in v.10.4 and update according to the addendum and =
+documents attached here.&nbsp; This new document will be needed to =
+support the v14 upcoming, in a similar embedded fashion. &nbsp; Compare =
+your version to the one embedded in v12, and let=E2=80=99s discuss any =
+major differences.</span></div><div><span style=3D"font-size: 16px; =
+color: rgb(39, 37, 30); font-family: pplxSans, ui-sans-serif, system-ui, =
+-apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica =
+Neue&quot;, Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, =
+&quot;Yu Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; orphans: =
+2; widows: 2; white-space: pre-line; background-color: rgba(39, 26, 0, =
+0.035); text-decoration-thickness: initial; text-decoration-style: =
+initial; text-decoration-color: initial;"><br></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">(2) create a plan for implementing the =
+new v14 simulator</span></div><div><span style=3D"font-size: 16px; =
+color: rgb(39, 37, 30); font-family: pplxSans, ui-sans-serif, system-ui, =
+-apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica =
+Neue&quot;, Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, =
+&quot;Yu Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; orphans: =
+2; widows: 2; white-space: pre-line; background-color: rgba(39, 26, 0, =
+0.035); text-decoration-thickness: initial; text-decoration-style: =
+initial; text-decoration-color: initial;"><br></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;"><div style=3D"caret-color: rgb(0, 0, =
+0); color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; =
+white-space: normal;"><span style=3D"font-size: 16px; color: rgb(39, 37, =
+30); font-family: pplxSans, ui-sans-serif, system-ui, -apple-system, =
+system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, =
+Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu =
+Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; =
+white-space: pre-line; text-decoration-thickness: initial; =
+text-decoration-style: initial; text-decoration-color: initial;">=46rom =
+v. 10.4 Please keep the&nbsp; following tabs intact: Damped Oscillator, =
+how it works, USGS bathymetry, Glossary, Data =
+explorer&nbsp;</span></div><div style=3D"caret-color: rgb(0, 0, 0); =
+color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; =
+white-space: normal;"><span style=3D"font-size: 16px; color: rgb(39, 37, =
+30); font-family: pplxSans, ui-sans-serif, system-ui, -apple-system, =
+system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, =
+Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu =
+Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; =
+white-space: pre-line; text-decoration-thickness: initial; =
+text-decoration-style: initial; text-decoration-color: =
+initial;"><br></span></div><div style=3D"caret-color: rgb(0, 0, 0); =
+color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; =
+white-space: normal;"><span style=3D"font-size: 16px; color: rgb(39, 37, =
+30); font-family: pplxSans, ui-sans-serif, system-ui, -apple-system, =
+system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, =
+Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu =
+Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; =
+white-space: pre-line; text-decoration-thickness: initial; =
+text-decoration-style: initial; text-decoration-color: initial;">=46rom =
+V12, keep the =E2=80=9Cwater budget=E2=80=9D tab, the model and methods, =
+and the version history tab, noting that v.10 was in March, 2026. v12 =
+and v13 were unsuccessful attempts to implement the above changes. =
+&nbsp;On v.14, please add an appropriate citation for the efforts by =
+Codex, augmenting what has previously been done in =
+Perplexity.</span></div><div style=3D"caret-color: rgb(0, 0, 0); color: =
+rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; white-space: =
+normal;"><span style=3D"font-size: 16px; color: rgb(39, 37, 30); =
+font-family: pplxSans, ui-sans-serif, system-ui, -apple-system, =
+system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, =
+Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu =
+Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; =
+white-space: pre-line; text-decoration-thickness: initial; =
+text-decoration-style: initial; text-decoration-color: =
+initial;"><br></span></div><div style=3D"caret-color: rgb(0, 0, 0); =
+color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; =
+white-space: normal;"><span style=3D"font-size: 16px; color: rgb(39, 37, =
+30); font-family: pplxSans, ui-sans-serif, system-ui, -apple-system, =
+system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, =
+Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu =
+Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; =
+white-space: pre-line; text-decoration-thickness: initial; =
+text-decoration-style: initial; text-decoration-color: initial;"><span =
+style=3D"font-variant-ligatures: normal; text-decoration-thickness: =
+initial; text-decoration-style: initial; text-decoration-color: =
+initial;">(3) please note that the RC white paper should just have my =
+authorship without reference to anyone else yet. I still need to =
+separately invite their =
+participation.&nbsp;</span></span></div></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;"><br></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">Attached find some graphs that belong =
+embedded in the white paper, which in turn, should be embedded in the =
+clickable HTML elevation simulator app. &nbsp;If, in your questioning =
+and planning phase, you find they are better suited embedded into a =
+different tab, I will certainly entertain your suggestion. &nbsp;I=E2=80=99=
+ll also entertain your recommendation on re-ordering the tabs for better =
+logical flow.</span></div><div><span style=3D"font-size: 16px; color: =
+rgb(39, 37, 30); font-family: pplxSans, ui-sans-serif, system-ui, =
+-apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica =
+Neue&quot;, Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, =
+&quot;Yu Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; orphans: =
+2; widows: 2; white-space: pre-line; background-color: rgba(39, 26, 0, =
+0.035); text-decoration-thickness: initial; text-decoration-style: =
+initial; text-decoration-color: initial;"><br></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">Below find some random notes from the =
+failed v12-13 threads that may or may not be helpful as you plan your =
+approach. &nbsp;They should be used in guiding, not determining your =
+direction and outcomes, But they may be helpful in framing questions =
+that I can answer in the first turn.</span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;"><br></span></div><div><span =
+style=3D"font-size: 16px; color: rgb(39, 37, 30); font-family: pplxSans, =
+ui-sans-serif, system-ui, -apple-system, system-ui, &quot;Segoe =
+UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto =
+Sans&quot;, &quot;Hiragino Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, =
+&quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang =
+TC&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang HK&quot;, =
+&quot;Microsoft JhengHei&quot;, &quot;PingFang MO&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;Apple SD Gothic Neo&quot;, &quot;Malgun =
+Gothic&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI =
+Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; =
+font-variant-ligatures: normal; orphans: 2; widows: 2; white-space: =
+pre-line; background-color: rgba(39, 26, 0, 0.035); =
+text-decoration-thickness: initial; text-decoration-style: initial; =
+text-decoration-color: initial;">On the Overview tab, I change the =
+sliders and nothing changes on the graph.&nbsp; does it work?&nbsp; I =
+would also like the graph to begin at 1977 for context.&nbsp; The intent =
+was that this should be a simplified version of the main simulator&nbsp; =
+ On the simulator tab I like the graphical presentation of v10.4, =
+particularly becasue of the uncertainty cone surrounding the =
+projection.&nbsp; On V12, again, I don=E2=80=99t see that any of the =
+policy levers actually have an effect on the projection, either from the =
+slider or from the annual accounting tabs.&nbsp; Please verify that =
+these are working, and if they are, please implement the v12 annual =
+accounting (and the new PDO-ENSO correlation) into the v10.4 =
+visualization.  On the Cross-validation tab, this tab name applies to =
+the V10.4, which we will keep.&nbsp; The v12 cross validation tab will =
+be retained in v14 but renamed as =E2=80=9CTesting Hypotheses=E2=80=9D.&nb=
+sp; NOTE here that the table in this tab indicates 61% skill for =
+forecasting in the five year horizon.&nbsp; We want to forecast out to =
+the 2036 horizon and let the uncertainty cone expand =
+accordingly.&nbsp;</span></div><div><span style=3D"font-size: 16px; =
+color: rgb(39, 37, 30); font-family: pplxSans, ui-sans-serif, system-ui, =
+-apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica =
+Neue&quot;, Arial, &quot;Noto Sans&quot;, &quot;Hiragino Sans&quot;, =
+&quot;Yu Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, &quot;Microsoft =
+YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, &quot;PingFang =
+MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD Gothic =
+Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple Color =
+Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, =
+&quot;Noto Color Emoji&quot;; font-variant-ligatures: normal; orphans: =
+2; widows: 2; white-space: pre-line; background-color: rgba(39, 26, 0, =
+0.035); text-decoration-thickness: initial; text-decoration-style: =
+initial; text-decoration-color: =
+initial;"><br></span></div><div><br></div><div><span style=3D"font-size: =
+16px; color: rgb(39, 37, 30); font-family: pplxSans, ui-sans-serif, =
+system-ui, -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, =
+&quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, &quot;Hiragino =
+Sans&quot;, &quot;Yu Gothic&quot;, Meiryo, &quot;PingFang SC&quot;, =
+&quot;Microsoft YaHei&quot;, &quot;PingFang TC&quot;, &quot;Microsoft =
+JhengHei&quot;, &quot;PingFang HK&quot;, &quot;Microsoft JhengHei&quot;, =
+&quot;PingFang MO&quot;, &quot;Microsoft JhengHei&quot;, &quot;Apple SD =
+Gothic Neo&quot;, &quot;Malgun Gothic&quot;, sans-serif, &quot;Apple =
+Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI =
+Symbol&quot;, &quot;Noto Color Emoji&quot;; font-variant-ligatures: =
+normal; orphans: 2; widows: 2; white-space: pre-line; background-color: =
+rgba(39, 26, 0, 0.035); text-decoration-thickness: initial; =
+text-decoration-style: initial; text-decoration-color: initial;"><span =
+style=3D"font-variant-ligatures: normal; text-decoration-thickness: =
+initial; text-decoration-style: initial; text-decoration-color: =
+initial;">Some clarifications: the purpose of the Overview tab is to =
+provide a very simple entry point, useful for educational purposes and =
+implementing the RC enabled forecasting but without the other =
+distractions. Q2: yes, 2034 is a milestone marker. The 2026 PDO/ENSO =
+effects are expected to be lagged to 2030-31, correct? yes, note the =
+skill % drop at 2036. Q3: So the annual accounting functions only apply =
+in the "simulator" tab. Please verify that any changes to any of the =
+years would be reflected both in downstream effects from the same lever, =
+as well as manifest in the total trend (yes, "drive" per you 3(c) =
+question). I expect that one-time changes (reservoir release etc) will =
+not make a huge difference, but phragmites and mineral changes will =
+reflect every year. Q4: I think the PDO/ENSO should be fixed according =
+to our best understanding of the current state (or the combined ENSO now =
+with the state of PDO 3+3 years ago. We already look at the weather, so =
+we should do a real-time check of the PDO /ENSO. Now, what may be =
+valuable would be to change these in the timeframe beyond the known =
+(spring 2027 for ENSO, post 3+3 for PDO?) that would enable some =
+scenario based forecasting beyond the known window. Can you come up with =
+a way to do that? Q5: Are you saying that v10.4 thought the then-current =
+elevation was 4192? If so, then yes, definitely update this. Q6: on =
+versioning: yes v10 in March. Skip v.12 documentation and incorporate =
+the PDO/ENSO integration into V13. </span></span></div></body></html>=
+
+--Apple-Mail=_549F887B-49EE-40B8-9DA1-A45A222E6397--
+
+--Apple-Mail=_2495CE5E-76EE-4542-B5EA-AD477AC80728--
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>color</key>
+	<string>000000</string>
+	<key>conversation-id</key>
+	<integer>475486</integer>
+	<key>date-last-viewed</key>
+	<integer>1779343620</integer>
+	<key>date-received</key>
+	<integer>1779339211</integer>
+	<key>flags</key>
+	<integer>1657857583233</integer>
+	<key>remote-id</key>
+	<string>11237</string>
+</dict>
+</plist>
